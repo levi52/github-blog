@@ -43,13 +43,13 @@ function BlogContent() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
-      <div className="mb-10">
+      <div className="mb-10 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-3">Archive</p>
         <h1 className="text-3xl font-bold tracking-tight">Blog</h1>
       </div>
 
       <form
-        className="mb-10"
+        className="mb-10 animate-slide-in-up delay-100"
         onSubmit={(e) => {
           e.preventDefault();
           const input = e.currentTarget.elements.namedItem("q") as HTMLInputElement;
@@ -69,18 +69,18 @@ function BlogContent() {
             type="text"
             placeholder="Search posts..."
             defaultValue={q || ""}
-            className="w-full pl-10 pr-4 py-2.5 bg-surface border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted"
+            className="w-full pl-10 pr-4 py-2.5 bg-surface border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all duration-200 placeholder:text-text-muted hover:border-border-hover"
           />
         </div>
       </form>
 
       {(category || tag || q) && (
-        <div className="mb-8 flex items-center gap-2 text-sm">
+        <div className="mb-8 flex items-center gap-2 text-sm animate-fade-in">
           <span className="text-text-muted">Filtered by</span>
           <span className="px-2.5 py-1 bg-accent/10 text-accent rounded-md font-medium text-xs">
             {filterLabel}
           </span>
-          <Link href="/blog/" className="text-text-muted hover:text-accent transition-colors ml-1">
+          <Link href="/blog/" className="text-text-muted hover:text-accent transition-colors duration-200 ml-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -91,7 +91,11 @@ function BlogContent() {
       <div className="flex gap-12">
         <div className="flex-1 space-y-4">
           {posts.length > 0 ? (
-            posts.map((post) => <PostCard key={post.slug} post={post} />)
+            posts.map((post, i) => (
+              <div key={post.slug} className={`animate-slide-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
+                <PostCard post={post} />
+              </div>
+            ))
           ) : (
             <div className="py-16 text-center">
               <p className="text-text-muted text-sm">No posts found.</p>
@@ -99,7 +103,7 @@ function BlogContent() {
           )}
         </div>
 
-        <aside className="w-48 shrink-0 hidden lg:block">
+        <aside className="w-48 shrink-0 hidden lg:block animate-slide-in-left delay-300">
           <div className="sticky top-8 space-y-8">
             {categories.length > 0 && (
               <div>
@@ -111,7 +115,11 @@ function BlogContent() {
                     <li key={cat}>
                       <Link
                         href={buildHref("category", cat)}
-                        className={`text-sm transition-colors ${category === cat ? "text-accent font-medium" : "text-text-secondary hover:text-text"}`}
+                        className={`text-sm px-2 py-1 rounded-md transition-all duration-200 block ${
+                          category === cat
+                            ? "text-accent font-medium bg-accent/10"
+                            : "text-text-secondary hover:text-text hover:bg-border/30"
+                        }`}
                       >
                         {cat}
                       </Link>
@@ -130,7 +138,11 @@ function BlogContent() {
                     <Link
                       key={t}
                       href={buildHref("tag", t)}
-                      className={`text-xs px-2.5 py-1 rounded-md transition-colors ${tag === t ? "bg-accent/10 text-accent font-medium" : "bg-bg-secondary text-text-muted hover:text-text-secondary"}`}
+                      className={`text-xs px-2.5 py-1 rounded-lg transition-all duration-200 ${
+                        tag === t
+                          ? "bg-accent/10 text-accent font-medium"
+                          : "bg-bg-secondary text-text-muted hover:text-text hover:bg-accent/10"
+                      }`}
                     >
                       #{t}
                     </Link>

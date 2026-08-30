@@ -108,3 +108,12 @@ export function searchPosts(query: string): PostData[] {
       post.categories.some((c) => c.toLowerCase().includes(lowerQuery))
   );
 }
+
+export function getAdjacentPosts(slug: string): { prev: PostData | null; next: PostData | null } {
+  const posts = getAllPostsRaw();
+  const index = posts.findIndex((post) => post.slug === slug);
+  return {
+    prev: index < posts.length - 1 ? posts[index + 1] : null,
+    next: index > 0 ? posts[index - 1] : null,
+  };
+}

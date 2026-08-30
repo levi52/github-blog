@@ -33,38 +33,36 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         showBtn
-          ? "border-border/50 bg-bg/95"
+          ? "border-border/50 bg-bg/95 backdrop-blur-sm"
           : "border-transparent bg-transparent"
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
-        <Link href="/" className="text-lg font-semibold tracking-tight text-text hover:text-accent">
+        <Link href="/" className="text-lg font-semibold tracking-tight text-text hover:text-accent transition-colors duration-200">
           Levi<span className="text-accent">.</span>
         </Link>
         <nav className="flex items-center gap-1 text-sm text-text-secondary">
-          <Link href="/" className="relative px-3 py-2 rounded-lg hover:text-text group">
-            首页
-            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent rounded-full transition-all duration-200 group-hover:w-4/5" />
-          </Link>
-          <Link href="/blog/" className="relative px-3 py-2 rounded-lg hover:text-text group">
-            博客
-            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent rounded-full transition-all duration-200 group-hover:w-4/5" />
-          </Link>
-          <Link href="/tools/" className="relative px-3 py-2 rounded-lg hover:text-text group">
-            工具
-            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent rounded-full transition-all duration-200 group-hover:w-4/5" />
-          </Link>
-          <Link href="/about/" className="relative px-3 py-2 rounded-lg hover:text-text group">
-            关于
-            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent rounded-full transition-all duration-200 group-hover:w-4/5" />
-          </Link>
+          {[
+            { href: "/", label: "首页" },
+            { href: "/blog/", label: "博客" },
+            { href: "/tools/", label: "工具" },
+            { href: "/about/", label: "关于" },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="px-3 py-2 rounded-lg hover:text-text hover:bg-border/30 transition-all duration-200"
+            >
+              {item.label}
+            </Link>
+          ))}
           <div className="w-px h-4 bg-border mx-1" />
           <ThemeToggle />
           <button
             onClick={scrollToTop}
-            className="relative h-9 rounded-full bg-text text-bg font-medium flex items-center justify-center overflow-hidden"
+            className="relative h-9 rounded-full bg-text text-bg font-medium flex items-center justify-center overflow-hidden hover:shadow-[var(--shadow-hover)] transition-all duration-300"
             aria-label="回到顶部"
             style={{
               width,

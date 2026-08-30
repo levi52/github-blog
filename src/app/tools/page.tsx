@@ -19,7 +19,7 @@ function JsonFormatter() {
   };
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-6">
+    <div className="bg-surface border border-border rounded-xl p-6 hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-2 h-2 rounded-full bg-accent"></div>
         <h3 className="text-sm font-semibold tracking-tight">JSON Formatter</h3>
@@ -28,11 +28,11 @@ function JsonFormatter() {
         placeholder="Paste JSON here..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full h-32 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted resize-none"
+        className="w-full h-32 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all duration-200 placeholder:text-text-muted resize-none hover:border-border-hover"
       />
       <button
         onClick={format}
-        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
+        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover hover:shadow-[var(--shadow-accent)] hover:scale-105 active:scale-95 transition-all duration-200"
       >
         Format
       </button>
@@ -69,7 +69,7 @@ function Base64Tool() {
   };
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-6">
+    <div className="bg-surface border border-border rounded-xl p-6 hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-2 h-2 rounded-full bg-accent"></div>
         <h3 className="text-sm font-semibold tracking-tight">Base64 Encoder / Decoder</h3>
@@ -77,13 +77,13 @@ function Base64Tool() {
       <div className="flex gap-1.5 mb-4 p-1 bg-bg rounded-lg border border-border">
         <button
           onClick={() => setMode("encode")}
-          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "encode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${mode === "encode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary hover:bg-border/30"}`}
         >
           Encode
         </button>
         <button
           onClick={() => setMode("decode")}
-          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "decode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${mode === "decode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary hover:bg-border/30"}`}
         >
           Decode
         </button>
@@ -92,11 +92,11 @@ function Base64Tool() {
         placeholder={mode === "encode" ? "Text to encode..." : "Base64 to decode..."}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full h-24 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted resize-none"
+        className="w-full h-24 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all duration-200 placeholder:text-text-muted resize-none hover:border-border-hover"
       />
       <button
         onClick={convert}
-        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
+        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover hover:shadow-[var(--shadow-accent)] hover:scale-105 active:scale-95 transition-all duration-200"
       >
         Convert
       </button>
@@ -139,7 +139,7 @@ function TimestampConverter() {
   };
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-6">
+    <div className="bg-surface border border-border rounded-xl p-6 hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-2 h-2 rounded-full bg-accent"></div>
         <h3 className="text-sm font-semibold tracking-tight">Timestamp Converter</h3>
@@ -152,11 +152,11 @@ function TimestampConverter() {
               placeholder="e.g. 1693401600"
               value={timestamp}
               onChange={(e) => setTimestamp(e.target.value)}
-              className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted"
+              className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all duration-200 placeholder:text-text-muted hover:border-border-hover"
             />
             <button
               onClick={toDateTime}
-              className="px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
+              className="px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover hover:shadow-[var(--shadow-accent)] hover:scale-105 active:scale-95 transition-all duration-200"
             >
               Convert
             </button>
@@ -169,11 +169,11 @@ function TimestampConverter() {
               type="datetime-local"
               value={dateStr}
               onChange={(e) => setDateStr(e.target.value)}
-              className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all"
+              className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all duration-200 hover:border-border-hover"
             />
             <button
               onClick={toTimestamp}
-              className="px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
+              className="px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover hover:shadow-[var(--shadow-accent)] hover:scale-105 active:scale-95 transition-all duration-200"
             >
               Convert
             </button>
@@ -207,7 +207,7 @@ function UrlEncoder() {
   };
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-6">
+    <div className="bg-surface border border-border rounded-xl p-6 hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-2 h-2 rounded-full bg-accent"></div>
         <h3 className="text-sm font-semibold tracking-tight">URL Encoder / Decoder</h3>
@@ -215,13 +215,13 @@ function UrlEncoder() {
       <div className="flex gap-1.5 mb-4 p-1 bg-bg rounded-lg border border-border">
         <button
           onClick={() => setMode("encode")}
-          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "encode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${mode === "encode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary hover:bg-border/30"}`}
         >
           Encode
         </button>
         <button
           onClick={() => setMode("decode")}
-          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "decode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${mode === "decode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary hover:bg-border/30"}`}
         >
           Decode
         </button>
@@ -230,11 +230,11 @@ function UrlEncoder() {
         placeholder={mode === "encode" ? "URL to encode..." : "URL to decode..."}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full h-24 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted resize-none"
+        className="w-full h-24 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all duration-200 placeholder:text-text-muted resize-none hover:border-border-hover"
       />
       <button
         onClick={convert}
-        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
+        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover hover:shadow-[var(--shadow-accent)] hover:scale-105 active:scale-95 transition-all duration-200"
       >
         Convert
       </button>
@@ -252,15 +252,15 @@ function UrlEncoder() {
 export default function ToolsPage() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
-      <div className="mb-10">
+      <div className="mb-10 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-3">Utilities</p>
         <h1 className="text-3xl font-bold tracking-tight">Tools</h1>
       </div>
       <div className="grid gap-6 md:grid-cols-2">
-        <JsonFormatter />
-        <Base64Tool />
-        <TimestampConverter />
-        <UrlEncoder />
+        <div className="animate-slide-in-up delay-100"><JsonFormatter /></div>
+        <div className="animate-slide-in-up delay-200"><Base64Tool /></div>
+        <div className="animate-slide-in-up delay-300"><TimestampConverter /></div>
+        <div className="animate-slide-in-up delay-400"><UrlEncoder /></div>
       </div>
     </div>
   );

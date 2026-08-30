@@ -12,6 +12,9 @@
   --border-hover: #d1cbc4;
   --surface: #ffffff;
   --surface-hover: #faf9f7;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.1);
+  --shadow-accent: 0 4px 16px rgba(192,86,33,0.15);
 }
 
 html.dark {
@@ -26,6 +29,9 @@ html.dark {
   --border-hover: #3a3632;
   --surface: #1c1a17;
   --surface-hover: #242220;
+  --shadow: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.3);
+  --shadow-accent: 0 4px 16px rgba(232,121,58,0.2);
 }
 
 @theme inline {
@@ -56,14 +62,45 @@ body {
   color: white;
 }
 
-*, *::before, *::after {
-  transition-property: color, background-color, border-color;
-  transition-timing-function: ease;
-  transition-duration: 0.15s;
+a {
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-a {
-  transition: color 0.15s ease;
+img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes fadeIn {
@@ -71,6 +108,24 @@ a {
   to { opacity: 1; }
 }
 
+.animate-slide-in-up {
+  animation: slideInUp 0.5s ease-out backwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out backwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out backwards;
+}
+
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out forwards;
 }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
