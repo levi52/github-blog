@@ -1,0 +1,94 @@
+{
+  "profile": {
+    "name": "Levi5",
+    "login": "levi52",
+    "avatar": "https://avatars.githubusercontent.com/u/102035256?v=4",
+    "bio": "Nothing",
+    "blog": "https://levi52.github.io/",
+    "publicRepos": 7,
+    "created": "2022-03-21T12:27:27Z",
+    "followers": 0,
+    "following": 0
+  },
+  "repos": [
+    {
+      "name": "github-blog",
+      "description": "github blog",
+      "language": "TypeScript",
+      "url": "https://github.com/levi52/github-blog",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "blog"
+      ],
+      "updatedAt": "2026-08-30T13:31:57Z"
+    },
+    {
+      "name": "dsh-appearance",
+      "description": "DeepSeek Harness Web UI 的外观设置插件，一键个性化你的 Web UI【NPM】",
+      "language": "JavaScript",
+      "url": "https://github.com/levi52/dsh-appearance",
+      "stars": 2,
+      "forks": 0,
+      "topics": [
+        "dsh-plugin"
+      ],
+      "updatedAt": "2026-08-25T20:28:17Z"
+    },
+    {
+      "name": "dsh-pet",
+      "description": "🐾 DeepSeek Harness 桌宠插件",
+      "language": "JavaScript",
+      "url": "https://github.com/levi52/dsh-pet",
+      "stars": 2,
+      "forks": 0,
+      "topics": [
+        "dsh-plugin"
+      ],
+      "updatedAt": "2026-08-25T04:58:47Z"
+    },
+    {
+      "name": "dsh-launcher",
+      "description": "🐋 DeepSeek Harness Web UI 启动器",
+      "language": "JavaScript",
+      "url": "https://github.com/levi52/dsh-launcher",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "dsh"
+      ],
+      "updatedAt": "2026-08-24T19:07:27Z"
+    },
+    {
+      "name": "BiliFav",
+      "description": "油猴脚本：获取B站网页收藏夹列表及收藏夹内视频信息，支持导出 JSON / CSV 。",
+      "language": "JavaScript",
+      "url": "https://github.com/levi52/BiliFav",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "updatedAt": "2026-08-08T02:59:39Z"
+    },
+    {
+      "name": "XMind2MD",
+      "description": "本地运行的 XMind 思维导图 → Markdown 转换工具",
+      "language": "HTML",
+      "url": "https://github.com/levi52/XMind2MD",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "updatedAt": "2026-07-30T01:48:10Z"
+    },
+    {
+      "name": "levi52",
+      "description": "GitHub Profile",
+      "language": "Unknown",
+      "url": "https://github.com/levi52/levi52",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "updatedAt": "2026-07-07T03:10:34Z"
+    }
+  ],
+  "fetchedAt": "2026-08-30T13:45:12.978Z"
+}

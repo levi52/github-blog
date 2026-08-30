@@ -1,70 +1,14 @@
 import Link from "next/link";
+import githubData from "@/lib/github-data.json";
 
-const profile = {
-  name: "Levi5",
-  login: "levi52",
-  avatar: "https://avatars.githubusercontent.com/u/102035256?v=4",
-  bio: "Nothing",
-  blog: "https://levi52.github.io/",
-  publicRepos: 7,
-  created: "2022-03-21",
-};
-
-const repos = [
-  {
-    name: "github-blog",
-    description: "github blog",
-    language: "TypeScript",
-    url: "https://github.com/levi52/github-blog",
-    stars: 0,
-    topics: ["blog"],
-  },
-  {
-    name: "dsh-appearance",
-    description: "DeepSeek Harness Web UI 的外观设置插件，一键个性化你的 Web UI【NPM】",
-    language: "JavaScript",
-    url: "https://github.com/levi52/dsh-appearance",
-    stars: 2,
-    topics: ["dsh-plugin"],
-  },
-  {
-    name: "dsh-pet",
-    description: "DeepSeek Harness 桌宠插件",
-    language: "JavaScript",
-    url: "https://github.com/levi52/dsh-pet",
-    stars: 2,
-    topics: ["dsh-plugin"],
-  },
-  {
-    name: "dsh-launcher",
-    description: "DeepSeek Harness Web UI 启动器",
-    language: "JavaScript",
-    url: "https://github.com/levi52/dsh-launcher",
-    stars: 1,
-    topics: ["dsh"],
-  },
-  {
-    name: "BiliFav",
-    description: "油猴脚本：获取B站网页收藏夹列表及收藏夹内视频信息，支持导出 JSON / CSV",
-    language: "JavaScript",
-    url: "https://github.com/levi52/BiliFav",
-    stars: 0,
-    topics: [],
-  },
-  {
-    name: "XMind2MD",
-    description: "本地运行的 XMind 思维导图 → Markdown 转换工具",
-    language: "HTML",
-    url: "https://github.com/levi52/XMind2MD",
-    stars: 0,
-    topics: [],
-  },
-];
+const { profile, repos } = githubData;
 
 const langColors: Record<string, string> = {
   TypeScript: "#3178c6",
   JavaScript: "#f1e05a",
   HTML: "#e34c26",
+  CSS: "#563d7c",
+  Unknown: "#999",
 };
 
 export default function AboutPage() {
@@ -148,13 +92,13 @@ export default function AboutPage() {
                 <span className="flex items-center gap-1.5 text-xs text-text-muted">
                   <span
                     className="w-2.5 h-2.5 rounded-full"
-                    style={{ backgroundColor: langColors[repo.language] || "#999" }}
+                    style={{ backgroundColor: langColors[repo.language] || langColors.Unknown }}
                   ></span>
                   {repo.language}
                 </span>
                 {repo.topics.length > 0 && (
                   <div className="flex gap-1">
-                    {repo.topics.map((t) => (
+                    {repo.topics.slice(0, 3).map((t) => (
                       <span key={t} className="text-xs px-1.5 py-0.5 bg-bg-secondary text-text-muted rounded hover:bg-accent/10 hover:text-accent transition-colors duration-200">
                         {t}
                       </span>
