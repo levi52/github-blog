@@ -107,7 +107,7 @@ export default function BlogList({
                   <li key={cat}>
                     <button
                       onClick={() => handleCategoryClick(cat)}
-                      className="hover:underline text-gray-600 dark:text-gray-400 text-left"
+                      className="hover:underline text-gray-600 dark:text-gray-400 text-left cursor-pointer w-full text-left"
                     >
                       {cat}
                     </button>
@@ -124,7 +124,7 @@ export default function BlogList({
                   <button
                     key={t}
                     onClick={() => handleTagClick(t)}
-                    className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded hover:opacity-80"
+                    className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded hover:opacity-80 cursor-pointer"
                   >
                     #{t}
                   </button>
