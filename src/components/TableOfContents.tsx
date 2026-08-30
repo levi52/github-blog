@@ -15,7 +15,7 @@ export default function TableOfContents() {
   useEffect(() => {
     const elements = document.querySelectorAll(".prose h2, .prose h3");
     const items: TocItem[] = Array.from(elements).map((el, index) => {
-      const id = el.id || el.textContent?.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "") || `heading-${index}`;
+      const id = el.id || `${el.tagName.toLowerCase()}-${index}`;
       el.id = id;
       return {
         id,

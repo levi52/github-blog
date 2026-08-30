@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://levi52.github.io/</loc><lastmod>2026-08-30T11:30:40.051Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://levi52.github.io/about/</loc><lastmod>2026-08-30T11:30:40.053Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://levi52.github.io/blog/</loc><lastmod>2026-08-30T11:30:40.053Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://levi52.github.io/blog/github-pages-guide/</loc><lastmod>2026-08-30T11:30:40.053Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://levi52.github.io/blog/hello-world/</loc><lastmod>2026-08-30T11:30:40.053Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://levi52.github.io/blog/nextjs-15-features/</loc><lastmod>2026-08-30T11:30:40.053Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://levi52.github.io/blog/react-state-management/</loc><lastmod>2026-08-30T11:30:40.053Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://levi52.github.io/tools/</loc><lastmod>2026-08-30T11:30:40.053Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://levi52.github.io/</loc><lastmod>2026-08-30T11:49:22.611Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://levi52.github.io/about/</loc><lastmod>2026-08-30T11:49:22.613Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://levi52.github.io/blog/</loc><lastmod>2026-08-30T11:49:22.613Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://levi52.github.io/blog/git-guide/</loc><lastmod>2026-08-30T11:49:22.613Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://levi52.github.io/blog/github-profile-readme/</loc><lastmod>2026-08-30T11:49:22.613Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://levi52.github.io/tools/</loc><lastmod>2026-08-30T11:49:22.613Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

@@ -12,10 +12,10 @@ export default function Header() {
   const handleScroll = useCallback(() => {
     const y = window.scrollY;
     setNavFixed(y > 50);
-    setIsLong(y > 400);
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const percent = maxScroll > 0 ? Math.min(Math.round((y / maxScroll) * 100), 100) : 0;
     setScrollPercent(percent);
+    setIsLong(percent >= 50);
   }, []);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Header() {
   };
 
   const showBtn = navFixed;
-  const width = !showBtn ? 0 : isLong ? 100 : 36;
+  const width = !showBtn ? 0 : isLong ? 110 : 36;
 
   return (
     <header
