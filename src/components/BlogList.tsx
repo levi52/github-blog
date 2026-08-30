@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import PostCard from "@/components/PostCard";
 import {
   getAllPostsClient,
@@ -11,81 +11,64 @@ import {
   getPostsByTagClient,
   searchPostsClient,
 } from "@/lib/posts-client";
-import type { PostData } from "@/lib/posts-client";
 
-export default function BlogList({
-  initialPosts,
-  initialCategories,
-  initialTags,
-}: {
-  initialPosts: PostData[];
-  initialCategories: string[];
-  initialTags: string[];
-}) {
-  const [posts, setPosts] = useState(initialPosts);
-  const [categories] = useState(initialCategories);
-  const [tags] = useState(initialTags);
-  const [activeFilter, setActiveFilter] = useState<{
-    type: "category" | "tag" | "query" | null;
-    value: string | null;
-  }>({ type: null, value: null });
+function BlogContent() {
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category");
+  const tag = searchParams.get("tag");
+  const q = searchParams.get("q");
 
-  const handleSearch = (query: string) => {
-    if (!query.trim()) {
-      setPosts(getAllPostsClient());
-      setActiveFilter({ type: null, value: null });
-      return;
-    }
-    setPosts(searchPostsClient(query));
-    setActiveFilter({ type: "query", value: query });
-  };
+  let posts;
+  let filterLabel = "";
 
-  const handleCategoryClick = (category: string) => {
-    setPosts(getPostsByCategoryClient(category));
-    setActiveFilter({ type: "category", value: category });
-  };
+  if (q) {
+    posts = searchPostsClient(q);
+    filterLabel = `"${q}"`;
+  } else if (category) {
+    posts = getPostsByCategoryClient(category);
+    filterLabel = category;
+  } else if (tag) {
+    posts = getPostsByTagClient(tag);
+    filterLabel = `#${tag}`;
+  } else {
+    posts = getAllPostsClient();
+  }
 
-  const handleTagClick = (tag: string) => {
-    setPosts(getPostsByTagClient(tag));
-    setActiveFilter({ type: "tag", value: tag });
-  };
+  const categories = getAllCategoriesClient();
+  const tags = getAllTagsClient();
 
-  const handleClear = () => {
-    setPosts(getAllPostsClient());
-    setActiveFilter({ type: null, value: null });
-  };
+  const buildHref = (key: string, value: string) => `/blog/?${key}=${encodeURIComponent(value)}`;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-8">Blog</h1>
 
-      <div className="mb-8">
+      <form
+        className="mb-8"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const form = e.currentTarget;
+          const input = form.elements.namedItem("q") as HTMLInputElement;
+          const value = input.value.trim();
+          window.location.href = value ? `/blog/?q=${encodeURIComponent(value)}` : "/blog/";
+        }}
+      >
         <input
+          name="q"
           type="text"
           placeholder="Search posts..."
-          onChange={(e) => handleSearch(e.target.value)}
+          defaultValue={q || ""}
           className="w-full max-w-md px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-900"
         />
-      </div>
+      </form>
 
-      {activeFilter.type && (
+      {(category || tag || q) && (
         <div className="mb-6 flex items-center gap-2 text-sm text-gray-500">
           <span>Filtered by:</span>
-          {activeFilter.type === "category" && (
-            <span className="font-medium">{activeFilter.value}</span>
-          )}
-          {activeFilter.type === "tag" && (
-            <span className="font-medium">#{activeFilter.value}</span>
-          )}
-          {activeFilter.type === "query" && (
-            <span className="font-medium">&quot;{activeFilter.value}&quot;</span>
-          )}
-          <button
-            onClick={handleClear}
-            className="text-blue-500 hover:underline ml-2"
-          >
+          <span className="font-medium">{filterLabel}</span>
+          <a href="/blog/" className="text-blue-500 hover:underline ml-2">
             Clear
-          </button>
+          </a>
         </div>
       )}
 
@@ -105,12 +88,12 @@ export default function BlogList({
               <ul className="space-y-1 text-sm">
                 {categories.map((cat) => (
                   <li key={cat}>
-                    <button
-                      onClick={() => handleCategoryClick(cat)}
-                      className="hover:underline text-gray-600 dark:text-gray-400 text-left cursor-pointer w-full text-left"
+                    <a
+                      href={buildHref("category", cat)}
+                      className="hover:underline text-gray-600 dark:text-gray-400 cursor-pointer"
                     >
                       {cat}
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -121,13 +104,13 @@ export default function BlogList({
               <h3 className="text-sm font-semibold mb-2">Tags</h3>
               <div className="flex flex-wrap gap-1">
                 {tags.map((t) => (
-                  <button
+                  <a
                     key={t}
-                    onClick={() => handleTagClick(t)}
+                    href={buildHref("tag", t)}
                     className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded hover:opacity-80 cursor-pointer"
                   >
                     #{t}
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>
@@ -135,5 +118,13 @@ export default function BlogList({
         </aside>
       </div>
     </div>
+  );
+}
+
+export default function BlogList() {
+  return (
+    <Suspense fallback={<div className="max-w-4xl mx-auto px-4 py-12">Loading...</div>}>
+      <BlogContent />
+    </Suspense>
   );
 }

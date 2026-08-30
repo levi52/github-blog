@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: "/github-blog",
   trailingSlash: true,
+  allowedDevOrigins: ["172.30.201.212"],
 };
 
 export default nextConfig;
