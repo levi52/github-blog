@@ -1,6 +1,7 @@
 "use client";
 
-import { useSearchParams, usePathname } from "next/navigation";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import PostCard from "@/components/PostCard";
 import {
@@ -13,9 +14,7 @@ import {
 } from "@/lib/posts-client";
 
 function BlogContent() {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const basePath = pathname.startsWith("/github-blog") ? "/github-blog" : "";
   const category = searchParams.get("category");
   const tag = searchParams.get("tag");
   const q = searchParams.get("q");
@@ -40,7 +39,7 @@ function BlogContent() {
   const tags = getAllTagsClient();
 
   const buildHref = (key: string, value: string) =>
-    `${basePath}/blog/?${key}=${encodeURIComponent(value)}`;
+    `/blog/?${key}=${encodeURIComponent(value)}`;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -52,9 +51,10 @@ function BlogContent() {
           e.preventDefault();
           const input = e.currentTarget.elements.namedItem("q") as HTMLInputElement;
           const value = input.value.trim();
+          const base = window.location.pathname.startsWith("/github-blog") ? "/github-blog" : "";
           window.location.href = value
-            ? `${basePath}/blog/?q=${encodeURIComponent(value)}`
-            : `${basePath}/blog/`;
+            ? `${base}/blog/?q=${encodeURIComponent(value)}`
+            : `${base}/blog/`;
         }}
       >
         <input
@@ -70,9 +70,9 @@ function BlogContent() {
         <div className="mb-6 flex items-center gap-2 text-sm text-gray-500">
           <span>Filtered by:</span>
           <span className="font-medium">{filterLabel}</span>
-          <a href={`${basePath}/blog/`} className="text-blue-500 hover:underline ml-2">
+          <Link href="/blog/" className="text-blue-500 hover:underline ml-2">
             Clear
-          </a>
+          </Link>
         </div>
       )}
 
@@ -92,12 +92,12 @@ function BlogContent() {
               <ul className="space-y-1 text-sm">
                 {categories.map((cat) => (
                   <li key={cat}>
-                    <a
+                    <Link
                       href={buildHref("category", cat)}
                       className="hover:underline text-gray-600 dark:text-gray-400 cursor-pointer"
                     >
                       {cat}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -108,13 +108,13 @@ function BlogContent() {
               <h3 className="text-sm font-semibold mb-2">Tags</h3>
               <div className="flex flex-wrap gap-1">
                 {tags.map((t) => (
-                  <a
+                  <Link
                     key={t}
                     href={buildHref("tag", t)}
                     className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded hover:opacity-80 cursor-pointer"
                   >
                     #{t}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
