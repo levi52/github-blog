@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ReadingProgress from "@/components/ReadingProgress";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Levi's Blog",
-  description: "Levi's personal blog and tech tools",
+  title: "Levi5's Blog",
+  description: "Levi5's personal blog and tech tools",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <ReadingProgress />
         <Header />
         <main className="flex-1 pt-[72px]">{children}</main>
         <Footer />

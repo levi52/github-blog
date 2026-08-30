@@ -14,6 +14,7 @@ export interface PostData {
   categories: string[];
   tags: string[];
   coverImage?: string;
+  pinned?: boolean;
 }
 
 export interface PostContent extends PostData {
@@ -42,10 +43,15 @@ function getAllPostsRaw(): PostData[] {
         categories: data.categories || [],
         tags: data.tags || [],
         coverImage: data.coverImage || undefined,
+        pinned: data.pinned || false,
       };
     });
 
-  return allPostsData.sort((a, b) => (a.date > b.date ? -1 : 1));
+  return allPostsData.sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    return a.date > b.date ? -1 : 1;
+  });
 }
 
 export function getAllPosts(): PostData[] {
@@ -72,6 +78,7 @@ export function getPostBySlug(slug: string): PostContent | null {
     categories: data.categories || [],
     tags: data.tags || [],
     coverImage: data.coverImage || undefined,
+    pinned: data.pinned || false,
     contentHtml,
   };
 }

@@ -5,6 +5,11 @@ export default function PostCard({ post }: { post: PostData }) {
   return (
     <article className="group h-full p-6 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300 flex flex-col">
       <div className="flex items-center gap-3 mb-3">
+        {post.pinned && (
+          <span className="text-xs px-2 py-0.5 bg-accent text-white rounded-md font-medium">
+            置顶
+          </span>
+        )}
         <time className="text-xs text-text-muted font-medium tracking-wide">
           {post.date}
         </time>

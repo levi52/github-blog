@@ -10,7 +10,7 @@ export default function Home() {
       <section className="pt-20 pb-16 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-4">Welcome</p>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-          Hi, I&apos;m <span className="text-accent">Levi</span>
+          Hi, I&apos;m <span className="text-accent">Levi5</span>
         </h1>
         <p className="text-lg text-text-secondary max-w-xl leading-relaxed">
           I write about programming, technology, and things I find interesting.
@@ -20,7 +20,7 @@ export default function Home() {
             href="/about/"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-text text-bg text-sm font-medium rounded-full hover:shadow-[var(--shadow-hover)] hover:scale-105 active:scale-95 transition-all duration-200"
           >
-            关于我
+            About
           </Link>
           <Link
             href="/blog/"

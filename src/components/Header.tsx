@@ -41,7 +41,7 @@ export default function Header() {
     >
       <div className="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
         <Link href="/" className="text-lg font-semibold tracking-tight text-text hover:text-accent transition-colors duration-200">
-          Levi<span className="text-accent">.</span>
+          Levi5<span className="text-accent">.</span>
         </Link>
         <nav className="flex items-center gap-1 text-sm text-text-secondary">
           {[
