@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://levi52.github.io
+
+# Sitemaps
+Sitemap: https://levi52.github.io/sitemap.xml
