@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://levi52.github.io
+Host: https://levi52.github.io/github-blog
 
 # Sitemaps
-Sitemap: https://levi52.github.io/sitemap.xml
+Sitemap: https://levi52.github.io/github-blog/sitemap.xml
