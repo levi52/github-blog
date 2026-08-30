@@ -11,10 +11,10 @@ export default function Header() {
           <Link href="/" className="hover:text-gray-600 dark:hover:text-gray-300">
             首页
           </Link>
-          <Link href="/blog" className="hover:text-gray-600 dark:hover:text-gray-300">
+          <Link href="/blog/" className="hover:text-gray-600 dark:hover:text-gray-300">
             博客
           </Link>
-          <Link href="/tools" className="hover:text-gray-600 dark:hover:text-gray-300">
+          <Link href="/tools/" className="hover:text-gray-600 dark:hover:text-gray-300">
             工具
           </Link>
           <a

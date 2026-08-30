@@ -20,7 +20,7 @@ export interface PostContent extends PostData {
   contentHtml: string;
 }
 
-export function getAllPosts(): PostData[] {
+function getAllPostsRaw(): PostData[] {
   if (!fs.existsSync(postsDirectory)) {
     return [];
   }
@@ -48,6 +48,10 @@ export function getAllPosts(): PostData[] {
   return allPostsData.sort((a, b) => (a.date > b.date ? -1 : 1));
 }
 
+export function getAllPosts(): PostData[] {
+  return getAllPostsRaw();
+}
+
 export function getPostBySlug(slug: string): PostContent | null {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   if (!fs.existsSync(fullPath)) {
@@ -73,32 +77,30 @@ export function getPostBySlug(slug: string): PostContent | null {
 }
 
 export function getAllCategories(): string[] {
-  const posts = getAllPosts();
+  const posts = getAllPostsRaw();
   const categories = new Set<string>();
   posts.forEach((post) => post.categories.forEach((c) => categories.add(c)));
   return Array.from(categories).sort();
 }
 
 export function getAllTags(): string[] {
-  const posts = getAllPosts();
+  const posts = getAllPostsRaw();
   const tags = new Set<string>();
   posts.forEach((post) => post.tags.forEach((t) => tags.add(t)));
   return Array.from(tags).sort();
 }
 
 export function getPostsByCategory(category: string): PostData[] {
-  return getAllPosts().filter((post) =>
-    post.categories.includes(category)
-  );
+  return getAllPostsRaw().filter((post) => post.categories.includes(category));
 }
 
 export function getPostsByTag(tag: string): PostData[] {
-  return getAllPosts().filter((post) => post.tags.includes(tag));
+  return getAllPostsRaw().filter((post) => post.tags.includes(tag));
 }
 
 export function searchPosts(query: string): PostData[] {
   const lowerQuery = query.toLowerCase();
-  return getAllPosts().filter(
+  return getAllPostsRaw().filter(
     (post) =>
       post.title.toLowerCase().includes(lowerQuery) ||
       post.summary.toLowerCase().includes(lowerQuery) ||

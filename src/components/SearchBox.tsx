@@ -10,9 +10,9 @@ export default function SearchBox() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      router.push(`/blog?q=${encodeURIComponent(query.trim())}`);
+      router.push(`/blog/?q=${encodeURIComponent(query.trim())}`);
     } else {
-      router.push("/blog");
+      router.push("/blog/");
     }
   };
 
