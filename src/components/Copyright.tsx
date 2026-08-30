@@ -5,7 +5,8 @@ interface CopyrightProps {
 
 export default function Copyright({ title, url }: CopyrightProps) {
   const siteUrl = "https://levi52.github.io";
-  const fullUrl = `${siteUrl}${url}`;
+  const basePath = process.env.GITHUB_ACTIONS ? "/github-blog" : "";
+  const fullUrl = `${siteUrl}${basePath}${url}`;
 
   return (
     <div className="mt-10 pt-6 border-t border-border">
