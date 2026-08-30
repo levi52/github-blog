@@ -5,6 +5,7 @@ import TableOfContents from "@/components/TableOfContents";
 import Copyright from "@/components/Copyright";
 import FontSizeAdjuster from "@/components/FontSizeAdjuster";
 import ProseContent from "@/components/ProseContent";
+import ShareButton from "@/components/ShareButton";
 
 export function generateStaticParams() {
   const posts = getAllPosts();
@@ -41,7 +42,10 @@ export default async function PostPage({
           <header className="mb-10">
             <div className="flex items-center justify-between mb-4">
               <time className="text-sm text-text-muted">{post.date}</time>
-              <FontSizeAdjuster />
+              <div className="flex items-center gap-2">
+                <ShareButton title={post.title} url={`/blog/${post.slug}/`} />
+                <FontSizeAdjuster />
+              </div>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-5">
               {post.title}

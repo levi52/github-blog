@@ -93,7 +93,7 @@ function BlogContent() {
           {posts.length > 0 ? (
             posts.map((post, i) => (
               <div key={post.slug} className={`animate-slide-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
-                <PostCard post={post} />
+                <PostCard post={post} query={q || ""} />
               </div>
             ))
           ) : (

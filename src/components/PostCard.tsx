@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { PostData } from "@/lib/posts";
+import HighlightText from "@/components/HighlightText";
 
-export default function PostCard({ post }: { post: PostData }) {
+export default function PostCard({ post, query }: { post: PostData; query?: string }) {
   return (
     <article className="group h-full p-6 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300 flex flex-col">
       <div className="flex items-center gap-3 mb-3">
@@ -16,11 +17,11 @@ export default function PostCard({ post }: { post: PostData }) {
       </div>
       <Link href={`/blog/${post.slug}/`}>
         <h2 className="text-lg font-semibold tracking-tight mb-2 group-hover:text-accent transition-colors duration-200">
-          {post.title}
+          <HighlightText text={post.title} query={query || ""} />
         </h2>
       </Link>
       <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-1">
-        {post.summary}
+        <HighlightText text={post.summary} query={query || ""} />
       </p>
       <div className="flex flex-wrap gap-2">
         {post.categories.map((cat) => (
