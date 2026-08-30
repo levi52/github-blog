@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 import { Suspense } from "react";
 import PostCard from "@/components/PostCard";
 import {
@@ -13,7 +13,9 @@ import {
 } from "@/lib/posts-client";
 
 function BlogContent() {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const basePath = pathname.startsWith("/github-blog") ? "/github-blog" : "";
   const category = searchParams.get("category");
   const tag = searchParams.get("tag");
   const q = searchParams.get("q");
@@ -37,7 +39,8 @@ function BlogContent() {
   const categories = getAllCategoriesClient();
   const tags = getAllTagsClient();
 
-  const buildHref = (key: string, value: string) => `/blog/?${key}=${encodeURIComponent(value)}`;
+  const buildHref = (key: string, value: string) =>
+    `${basePath}/blog/?${key}=${encodeURIComponent(value)}`;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -47,10 +50,11 @@ function BlogContent() {
         className="mb-8"
         onSubmit={(e) => {
           e.preventDefault();
-          const form = e.currentTarget;
-          const input = form.elements.namedItem("q") as HTMLInputElement;
+          const input = e.currentTarget.elements.namedItem("q") as HTMLInputElement;
           const value = input.value.trim();
-          window.location.href = value ? `/blog/?q=${encodeURIComponent(value)}` : "/blog/";
+          window.location.href = value
+            ? `${basePath}/blog/?q=${encodeURIComponent(value)}`
+            : `${basePath}/blog/`;
         }}
       >
         <input
@@ -66,7 +70,7 @@ function BlogContent() {
         <div className="mb-6 flex items-center gap-2 text-sm text-gray-500">
           <span>Filtered by:</span>
           <span className="font-medium">{filterLabel}</span>
-          <a href="/blog/" className="text-blue-500 hover:underline ml-2">
+          <a href={`${basePath}/blog/`} className="text-blue-500 hover:underline ml-2">
             Clear
           </a>
         </div>
