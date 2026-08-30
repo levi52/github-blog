@@ -6,35 +6,35 @@ export default function Home() {
   const recentPosts = postsData.posts.slice(0, 5);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <section className="mb-12">
-        <h1 className="text-3xl font-bold mb-4">Hi, I&apos;m Levi</h1>
-        <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-          Welcome to my blog. I write about programming, technology, and things
-          I find interesting.
+    <div className="max-w-5xl mx-auto px-6">
+      <section className="pt-20 pb-16">
+        <p className="text-sm text-text-muted tracking-widest uppercase mb-4">Welcome</p>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+          Hi, I&apos;m <span className="text-accent">Levi</span>
+        </h1>
+        <p className="text-lg text-text-secondary max-w-xl leading-relaxed">
+          I write about programming, technology, and things I find interesting.
         </p>
-        <div className="mt-4 flex gap-4">
-          <a
-            href="https://github.com/levi52"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm px-4 py-2 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        <div className="mt-8 flex items-center gap-4">
+          <Link
+            href="/about/"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-text text-bg text-sm font-medium rounded-full hover:opacity-90 transition-opacity"
           >
-            GitHub
-          </a>
+            关于我
+          </Link>
           <Link
             href="/blog/"
-            className="text-sm px-4 py-2 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-sm font-medium rounded-full hover:border-border-hover hover:bg-surface-hover transition-all"
           >
             View Blog
           </Link>
         </div>
       </section>
 
-      <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold">Recent Posts</h2>
-          <Link href="/blog/" className="text-sm text-gray-500 hover:underline">
+      <section className="pb-20">
+        <div className="flex items-baseline justify-between mb-8">
+          <h2 className="text-xl font-semibold tracking-tight">Recent Posts</h2>
+          <Link href="/blog/" className="text-sm text-text-muted hover:text-accent transition-colors">
             View all &rarr;
           </Link>
         </div>
@@ -45,9 +45,9 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-500 text-sm">
+          <p className="text-text-muted text-sm">
             No posts yet. Create your first post in{" "}
-            <code>content/posts/</code>.
+            <code className="text-accent">content/posts/</code>.
           </p>
         )}
       </section>

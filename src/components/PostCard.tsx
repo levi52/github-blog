@@ -3,22 +3,26 @@ import type { PostData } from "@/lib/posts";
 
 export default function PostCard({ post }: { post: PostData }) {
   return (
-    <article className="group p-6 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
+    <article className="group p-6 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-sm transition-all duration-200">
+      <div className="flex items-center gap-3 mb-3">
+        <time className="text-xs text-text-muted font-medium tracking-wide">
+          {post.date}
+        </time>
+      </div>
       <Link href={`/blog/${post.slug}/`}>
-        <h2 className="text-lg font-semibold mb-2 group-hover:underline">
+        <h2 className="text-lg font-semibold tracking-tight mb-2 group-hover:text-accent transition-colors">
           {post.title}
         </h2>
       </Link>
-      <time className="text-sm text-gray-500">{post.date}</time>
-      <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+      <p className="text-sm text-text-secondary leading-relaxed mb-4">
         {post.summary}
       </p>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {post.categories.map((cat) => (
           <Link
             key={cat}
             href={`/blog/?category=${encodeURIComponent(cat)}`}
-            className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded hover:opacity-80"
+            className="text-xs px-2.5 py-1 bg-accent/10 text-accent rounded-md hover:bg-accent/20 transition-colors font-medium"
           >
             {cat}
           </Link>
@@ -27,7 +31,7 @@ export default function PostCard({ post }: { post: PostData }) {
           <Link
             key={tag}
             href={`/blog/?tag=${encodeURIComponent(tag)}`}
-            className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded hover:opacity-80"
+            className="text-xs px-2.5 py-1 bg-bg-secondary text-text-muted rounded-md hover:text-text-secondary hover:bg-border/50 transition-colors"
           >
             #{tag}
           </Link>

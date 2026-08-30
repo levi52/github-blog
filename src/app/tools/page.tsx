@@ -19,23 +19,28 @@ function JsonFormatter() {
   };
 
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-3">JSON Formatter</h3>
+    <div className="bg-surface border border-border rounded-xl p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-2 h-2 rounded-full bg-accent"></div>
+        <h3 className="text-sm font-semibold tracking-tight">JSON Formatter</h3>
+      </div>
       <textarea
         placeholder="Paste JSON here..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full h-32 p-3 border border-gray-300 dark:border-gray-700 rounded-lg font-mono text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full h-32 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted resize-none"
       />
       <button
         onClick={format}
-        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
+        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
       >
         Format
       </button>
-      {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
+      {error && (
+        <p className="mt-2 text-sm text-red-500">{error}</p>
+      )}
       {output && (
-        <pre className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm overflow-auto max-h-64 border border-gray-200 dark:border-gray-700">
+        <pre className="mt-4 p-4 bg-bg border border-border rounded-lg text-sm overflow-auto max-h-64 font-mono whitespace-pre">
           {output}
         </pre>
       )}
@@ -64,18 +69,21 @@ function Base64Tool() {
   };
 
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-3">Base64 Encoder / Decoder</h3>
-      <div className="flex gap-2 mb-3">
+    <div className="bg-surface border border-border rounded-xl p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-2 h-2 rounded-full bg-accent"></div>
+        <h3 className="text-sm font-semibold tracking-tight">Base64 Encoder / Decoder</h3>
+      </div>
+      <div className="flex gap-1.5 mb-4 p-1 bg-bg rounded-lg border border-border">
         <button
           onClick={() => setMode("encode")}
-          className={`px-3 py-1 text-sm rounded ${mode === "encode" ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "encode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
         >
           Encode
         </button>
         <button
           onClick={() => setMode("decode")}
-          className={`px-3 py-1 text-sm rounded ${mode === "decode" ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "decode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
         >
           Decode
         </button>
@@ -84,20 +92,22 @@ function Base64Tool() {
         placeholder={mode === "encode" ? "Text to encode..." : "Base64 to decode..."}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full h-24 p-3 border border-gray-300 dark:border-gray-700 rounded-lg font-mono text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full h-24 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted resize-none"
       />
       <button
         onClick={convert}
-        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
+        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
       >
         Convert
       </button>
-      {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
+      {error && (
+        <p className="mt-2 text-sm text-red-500">{error}</p>
+      )}
       {output && (
         <textarea
           readOnly
           value={output}
-          className="w-full mt-3 p-3 border border-gray-300 dark:border-gray-700 rounded-lg font-mono text-sm bg-gray-50 dark:bg-gray-800 h-24"
+          className="w-full mt-4 p-3 bg-bg border border-border rounded-lg font-mono text-sm h-24 focus:outline-none resize-none"
         />
       )}
     </div>
@@ -113,7 +123,7 @@ function TimestampConverter() {
     try {
       const ts = parseInt(timestamp, 10);
       const date = ts > 1e12 ? new Date(ts) : new Date(ts * 1000);
-      setResult(date.toLocaleString("zh-CN") + " (Local) / " + date.toISOString() + " (UTC)");
+      setResult(date.toLocaleString("zh-CN") + " (Local)\n" + date.toISOString() + " (UTC)");
     } catch {
       setResult("Invalid timestamp");
     }
@@ -129,45 +139,48 @@ function TimestampConverter() {
   };
 
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-3">Timestamp Converter</h3>
-      <div className="space-y-3">
+    <div className="bg-surface border border-border rounded-xl p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-2 h-2 rounded-full bg-accent"></div>
+        <h3 className="text-sm font-semibold tracking-tight">Timestamp Converter</h3>
+      </div>
+      <div className="space-y-4">
         <div>
-          <label className="text-sm text-gray-500 mb-1 block">Timestamp to DateTime</label>
+          <label className="text-xs text-text-muted font-medium mb-1.5 block">Timestamp to DateTime</label>
           <div className="flex gap-2">
             <input
               placeholder="e.g. 1693401600"
               value={timestamp}
               onChange={(e) => setTimestamp(e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted"
             />
             <button
               onClick={toDateTime}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
+              className="px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
             >
               Convert
             </button>
           </div>
         </div>
         <div>
-          <label className="text-sm text-gray-500 mb-1 block">DateTime to Timestamp</label>
+          <label className="text-xs text-text-muted font-medium mb-1.5 block">DateTime to Timestamp</label>
           <div className="flex gap-2">
             <input
               type="datetime-local"
               value={dateStr}
               onChange={(e) => setDateStr(e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all"
             />
             <button
               onClick={toTimestamp}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
+              className="px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
             >
               Convert
             </button>
           </div>
         </div>
         {result && (
-          <pre className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm whitespace-pre-wrap border border-gray-200 dark:border-gray-700">
+          <pre className="p-4 bg-bg border border-border rounded-lg text-sm whitespace-pre-wrap font-mono">
             {result}
           </pre>
         )}
@@ -194,18 +207,21 @@ function UrlEncoder() {
   };
 
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-3">URL Encoder / Decoder</h3>
-      <div className="flex gap-2 mb-3">
+    <div className="bg-surface border border-border rounded-xl p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-2 h-2 rounded-full bg-accent"></div>
+        <h3 className="text-sm font-semibold tracking-tight">URL Encoder / Decoder</h3>
+      </div>
+      <div className="flex gap-1.5 mb-4 p-1 bg-bg rounded-lg border border-border">
         <button
           onClick={() => setMode("encode")}
-          className={`px-3 py-1 text-sm rounded ${mode === "encode" ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "encode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
         >
           Encode
         </button>
         <button
           onClick={() => setMode("decode")}
-          className={`px-3 py-1 text-sm rounded ${mode === "decode" ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"}`}
+          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${mode === "decode" ? "bg-surface text-text shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
         >
           Decode
         </button>
@@ -214,11 +230,11 @@ function UrlEncoder() {
         placeholder={mode === "encode" ? "URL to encode..." : "URL to decode..."}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full h-24 p-3 border border-gray-300 dark:border-gray-700 rounded-lg font-mono text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full h-24 p-3 bg-bg border border-border rounded-lg font-mono text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-text-muted resize-none"
       />
       <button
         onClick={convert}
-        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
+        className="mt-3 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-hover transition-colors"
       >
         Convert
       </button>
@@ -226,7 +242,7 @@ function UrlEncoder() {
         <textarea
           readOnly
           value={output}
-          className="w-full mt-3 p-3 border border-gray-300 dark:border-gray-700 rounded-lg font-mono text-sm bg-gray-50 dark:bg-gray-800 h-24"
+          className="w-full mt-4 p-3 bg-bg border border-border rounded-lg font-mono text-sm h-24 focus:outline-none resize-none"
         />
       )}
     </div>
@@ -235,21 +251,16 @@ function UrlEncoder() {
 
 export default function ToolsPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-8">Tools</h1>
-      <div className="grid gap-8 md:grid-cols-2">
-        <div className="p-6 border border-gray-200 dark:border-gray-800 rounded-lg">
-          <JsonFormatter />
-        </div>
-        <div className="p-6 border border-gray-200 dark:border-gray-800 rounded-lg">
-          <Base64Tool />
-        </div>
-        <div className="p-6 border border-gray-200 dark:border-gray-800 rounded-lg">
-          <TimestampConverter />
-        </div>
-        <div className="p-6 border border-gray-200 dark:border-gray-800 rounded-lg">
-          <UrlEncoder />
-        </div>
+    <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="mb-10">
+        <p className="text-sm text-text-muted tracking-widest uppercase mb-3">Utilities</p>
+        <h1 className="text-3xl font-bold tracking-tight">Tools</h1>
+      </div>
+      <div className="grid gap-6 md:grid-cols-2">
+        <JsonFormatter />
+        <Base64Tool />
+        <TimestampConverter />
+        <UrlEncoder />
       </div>
     </div>
   );
