@@ -53,9 +53,9 @@ export default function ImageLightbox({ src, alt, className }: ImageLightboxProp
         ) : (
           <div className="w-full h-48 bg-bg-secondary rounded-xl animate-pulse" />
         )}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 rounded-xl flex items-center justify-center">
+        <div className="absolute inset-0 bg-text/0 group-hover:bg-text/10 transition-colors duration-300 rounded-xl flex items-center justify-center">
           <svg
-            className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="w-8 h-8 text-surface opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -72,11 +72,11 @@ export default function ImageLightbox({ src, alt, className }: ImageLightboxProp
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-[100] bg-text/90 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setIsOpen(false)}
         >
           <button
-            className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+            className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-surface/10 text-surface hover:bg-surface/20 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

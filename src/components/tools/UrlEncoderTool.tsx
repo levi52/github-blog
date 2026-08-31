@@ -51,7 +51,7 @@ export default function UrlEncoderTool() {
         转换
       </button>
       {error && (
-        <p className="text-sm text-red-500">{error}</p>
+        <p className="text-sm text-accent">{error}</p>
       )}
       {output && (
         <textarea

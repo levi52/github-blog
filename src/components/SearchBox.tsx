@@ -20,10 +20,10 @@ export default function SearchBox() {
     <form onSubmit={handleSearch} className="mb-8">
       <input
         type="text"
-        placeholder="Search posts..."
+        placeholder="搜索文章..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full max-w-md px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-900"
+        className="w-full max-w-md px-4 py-2.5 bg-surface border border-border rounded-lg text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all duration-200 placeholder:text-text-muted hover:border-border-hover"
       />
     </form>
   );

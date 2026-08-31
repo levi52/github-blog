@@ -270,11 +270,7 @@ img {
 .code-copy-btn:hover {
   color: var(--accent);
   border-color: var(--accent);
-  background: rgba(178, 34, 34, 0.1);
-}
-
-html.dark .code-copy-btn:hover {
-  background: rgba(205, 92, 92, 0.1);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 html.dark .code-block-wrapper {

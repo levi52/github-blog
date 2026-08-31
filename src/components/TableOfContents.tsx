@@ -81,7 +81,7 @@ export default function TableOfContents() {
 
       {mobileOpen && (
         <div className="xl:hidden fixed inset-0 z-50 animate-fade-in">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
+          <div className="absolute inset-0 bg-text/50" onClick={() => setMobileOpen(false)} />
           <div className="absolute right-0 top-0 bottom-0 w-72 bg-surface shadow-xl p-6 animate-slide-in-left">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-text">目录</h3>

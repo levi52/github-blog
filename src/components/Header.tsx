@@ -143,7 +143,7 @@ export default function Header() {
           <ThemeToggle />
           <button
             onClick={scrollToTop}
-            className="relative h-9 rounded-full bg-text text-bg font-medium flex items-center justify-center overflow-hidden hover:shadow-[var(--shadow-hover)] transition-all duration-300"
+            className="relative h-9 rounded-lg border border-border text-text-secondary font-medium flex items-center justify-center overflow-hidden hover:border-border-hover hover:bg-surface-hover hover:text-text transition-all duration-300"
             aria-label="回到顶部"
             style={{
               width,

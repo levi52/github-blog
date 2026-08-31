@@ -67,7 +67,7 @@ export default function JsonFormatterTool() {
         </button>
       </div>
       {error && (
-        <p className="text-sm text-red-500">{error}</p>
+        <p className="text-sm text-accent">{error}</p>
       )}
       {output && (
         <pre className="p-4 bg-bg border border-border rounded-lg text-sm overflow-auto max-h-96 font-mono whitespace-pre">

@@ -60,7 +60,7 @@ export default function ColorPicker() {
             }`}
           >
             <div
-              className="w-8 h-8 rounded-full border-2 border-white shadow-md group-hover:scale-110 transition-transform duration-200"
+              className="w-8 h-8 rounded-full border-2 border-surface shadow-md group-hover:scale-110 transition-transform duration-200"
               style={{ backgroundColor: isDark ? option.darkColor : option.color }}
             />
             <span className={`text-xs ${

@@ -122,7 +122,7 @@ export default function RegexTool() {
       </button>
 
       {error && (
-        <p className="text-sm text-red-500">{error}</p>
+        <p className="text-sm text-accent">{error}</p>
       )}
 
       {matches.length > 0 && (
