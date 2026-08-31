@@ -22,6 +22,16 @@ export function getAllTagsClient(): string[] {
   return postsData.tags;
 }
 
+export function getTagCountsClient(): Record<string, number> {
+  const tagCounts: Record<string, number> = {};
+  postsData.posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  });
+  return tagCounts;
+}
+
 export function getPostsByCategoryClient(category: string): PostData[] {
   return postsData.posts.filter((post) => post.categories.includes(category));
 }

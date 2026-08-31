@@ -1,13 +1,40 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+
+interface DropdownItem {
+  href: string;
+  label: string;
+}
+
+interface NavItem {
+  href?: string;
+  label: string;
+  dropdown?: DropdownItem[];
+}
+
+const navItems: NavItem[] = [
+  { href: "/", label: "首页" },
+  {
+    label: "文章",
+    dropdown: [
+      { href: "/blog/", label: "全部文章" },
+      { href: "/blog/?view=categories", label: "全部分类" },
+      { href: "/blog/?view=tags", label: "全部标签" },
+    ],
+  },
+  { href: "/tools/", label: "工具" },
+  { href: "/about/", label: "关于" },
+];
 
 export default function Header() {
   const [navFixed, setNavFixed] = useState(false);
   const [scrollPercent, setScrollPercent] = useState(0);
   const [isLong, setIsLong] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleScroll = useCallback(() => {
     const y = window.scrollY;
@@ -24,8 +51,30 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleMouseEnter = (label: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setOpenDropdown(label);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150);
   };
 
   const showBtn = navFixed;
@@ -44,19 +93,51 @@ export default function Header() {
           Levi5<span className="text-accent">.</span>
         </Link>
         <nav className="flex items-center gap-1 text-sm text-text-secondary">
-          {[
-            { href: "/", label: "首页" },
-            { href: "/blog/", label: "博客" },
-            { href: "/tools/", label: "工具" },
-            { href: "/about/", label: "关于" },
-          ].map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="px-3 py-2 rounded-lg hover:text-text hover:bg-border/30 transition-all duration-200"
+          {navItems.map((item) => (
+            <div
+              key={item.label}
+              className="relative"
+              onMouseEnter={() => item.dropdown && handleMouseEnter(item.label)}
+              onMouseLeave={handleMouseLeave}
             >
-              {item.label}
-            </Link>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="px-3 py-2 rounded-lg hover:text-text hover:bg-border/30 transition-all duration-200 flex items-center gap-1"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  className="px-3 py-2 rounded-lg hover:text-text hover:bg-border/30 transition-all duration-200 flex items-center gap-1"
+                >
+                  {item.label}
+                  <svg
+                    className={`w-3 h-3 transition-transform duration-200 ${
+                      openDropdown === item.label ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              )}
+              {item.dropdown && openDropdown === item.label && (
+                <div className="absolute top-full left-0 mt-1 w-40 py-2 bg-surface border border-border rounded-lg shadow-lg animate-dropdown-in">
+                  {item.dropdown.map((dropdownItem) => (
+                    <Link
+                      key={dropdownItem.href}
+                      href={dropdownItem.href}
+                      className="block px-4 py-2 text-sm text-text-secondary hover:text-text hover:bg-border/30 transition-all duration-200"
+                    >
+                      {dropdownItem.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
           <div className="w-px h-4 bg-border mx-1" />
           <ThemeToggle />
