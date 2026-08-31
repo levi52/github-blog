@@ -139,7 +139,7 @@ function BlogContent() {
       )}
 
       {isCategoriesView ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 animate-slide-in-up">
+        <div key="categories" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 animate-slide-in-up">
           {categories.map((cat) => (
             <Link
               key={cat}
@@ -158,7 +158,7 @@ function BlogContent() {
           ))}
         </div>
       ) : isTagsView ? (
-        <div className="flex flex-wrap gap-3 animate-slide-in-up">
+        <div key="tags" className="flex flex-wrap gap-3 animate-slide-in-up">
           {tags.map((t) => (
             <Link
               key={t}
@@ -173,7 +173,7 @@ function BlogContent() {
           ))}
         </div>
       ) : isSeriesView ? (
-        <div className="space-y-6 animate-slide-in-up">
+        <div key="series" className="space-y-6 animate-slide-in-up">
           {series.map((s) => (
             <div key={s.name} className="p-6 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300">
               <div className="flex items-center justify-between mb-4">
@@ -200,7 +200,7 @@ function BlogContent() {
           ))}
         </div>
       ) : (
-        <div className="flex gap-12">
+        <div key="posts" className="flex gap-12 animate-slide-in-up">
           <div className="flex-1 space-y-8">
             {paginatedPosts.length > 0 ? (
               sortedYears.map((year) => (
