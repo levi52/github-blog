@@ -15,10 +15,18 @@ export interface PostData {
   tags: string[];
   coverImage?: string;
   pinned?: boolean;
+  draft?: boolean;
+  series?: string;
+  seriesOrder?: number;
 }
 
 export interface PostContent extends PostData {
   contentHtml: string;
+}
+
+export interface SeriesData {
+  name: string;
+  posts: PostData[];
 }
 
 function getAllPostsRaw(): PostData[] {
@@ -44,6 +52,9 @@ function getAllPostsRaw(): PostData[] {
         tags: data.tags || [],
         coverImage: data.coverImage || undefined,
         pinned: data.pinned || false,
+        draft: data.draft || false,
+        series: data.series || undefined,
+        seriesOrder: data.seriesOrder || undefined,
       };
     });
 
@@ -55,6 +66,10 @@ function getAllPostsRaw(): PostData[] {
 }
 
 export function getAllPosts(): PostData[] {
+  return getAllPostsRaw().filter((post) => !post.draft);
+}
+
+export function getAllPostsIncludingDrafts(): PostData[] {
   return getAllPostsRaw();
 }
 
@@ -79,35 +94,38 @@ export function getPostBySlug(slug: string): PostContent | null {
     tags: data.tags || [],
     coverImage: data.coverImage || undefined,
     pinned: data.pinned || false,
+    draft: data.draft || false,
+    series: data.series || undefined,
+    seriesOrder: data.seriesOrder || undefined,
     contentHtml,
   };
 }
 
 export function getAllCategories(): string[] {
-  const posts = getAllPostsRaw();
+  const posts = getAllPosts();
   const categories = new Set<string>();
   posts.forEach((post) => post.categories.forEach((c) => categories.add(c)));
   return Array.from(categories).sort();
 }
 
 export function getAllTags(): string[] {
-  const posts = getAllPostsRaw();
+  const posts = getAllPosts();
   const tags = new Set<string>();
   posts.forEach((post) => post.tags.forEach((t) => tags.add(t)));
   return Array.from(tags).sort();
 }
 
 export function getPostsByCategory(category: string): PostData[] {
-  return getAllPostsRaw().filter((post) => post.categories.includes(category));
+  return getAllPosts().filter((post) => post.categories.includes(category));
 }
 
 export function getPostsByTag(tag: string): PostData[] {
-  return getAllPostsRaw().filter((post) => post.tags.includes(tag));
+  return getAllPosts().filter((post) => post.tags.includes(tag));
 }
 
 export function searchPosts(query: string): PostData[] {
   const lowerQuery = query.toLowerCase();
-  return getAllPostsRaw().filter(
+  return getAllPosts().filter(
     (post) =>
       post.title.toLowerCase().includes(lowerQuery) ||
       post.summary.toLowerCase().includes(lowerQuery) ||
@@ -117,10 +135,44 @@ export function searchPosts(query: string): PostData[] {
 }
 
 export function getAdjacentPosts(slug: string): { prev: PostData | null; next: PostData | null } {
-  const posts = getAllPostsRaw();
+  const posts = getAllPosts();
   const index = posts.findIndex((post) => post.slug === slug);
   return {
     prev: index < posts.length - 1 ? posts[index + 1] : null,
     next: index > 0 ? posts[index - 1] : null,
   };
+}
+
+export function getAllSeries(): SeriesData[] {
+  const posts = getAllPosts();
+  const seriesMap = new Map<string, PostData[]>();
+
+  posts.forEach((post) => {
+    if (post.series) {
+      const existing = seriesMap.get(post.series) || [];
+      existing.push(post);
+      seriesMap.set(post.series, existing);
+    }
+  });
+
+  const series: SeriesData[] = [];
+  seriesMap.forEach((posts, name) => {
+    series.push({
+      name,
+      posts: posts.sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0)),
+    });
+  });
+
+  return series;
+}
+
+export function getSeriesByName(name: string): SeriesData | null {
+  const allSeries = getAllSeries();
+  return allSeries.find((s) => s.name === name) || null;
+}
+
+export function getPostsBySeries(series: string): PostData[] {
+  return getAllPosts()
+    .filter((post) => post.series === series)
+    .sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0));
 }
