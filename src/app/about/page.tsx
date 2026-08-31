@@ -1,5 +1,6 @@
 import Link from "next/link";
 import githubData from "@/lib/github-data.json";
+import ColorPicker from "@/components/ColorPicker";
 
 const { profile, repos } = githubData;
 
@@ -109,6 +110,10 @@ export default function AboutPage() {
             </a>
           ))}
         </div>
+      </section>
+
+      <section className="mt-16 animate-slide-in-up delay-400">
+        <ColorPicker />
       </section>
     </div>
   );

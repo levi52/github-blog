@@ -2,37 +2,97 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --bg: #faf9f7;
-  --bg-secondary: #f3f1ed;
-  --text: #1a1815;
-  --text-secondary: #6b6560;
-  --text-muted: #9c9590;
-  --accent: #c05621;
-  --accent-hover: #9c4221;
-  --border: #e8e4df;
-  --border-hover: #d1cbc4;
-  --surface: #ffffff;
-  --surface-hover: #faf9f7;
-  --shadow: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-hover: 0 8px 24px rgba(0,0,0,0.1);
-  --shadow-accent: 0 4px 16px rgba(192,86,33,0.15);
+  --bg: #f5f0e8;
+  --bg-secondary: #ebe5d9;
+  --text: #2d2a26;
+  --text-secondary: #5c5650;
+  --text-muted: #8a8480;
+  --accent: #b22222;
+  --accent-hover: #8b0000;
+  --border: #d4cfc7;
+  --border-hover: #b8b3ab;
+  --surface: #fffdf9;
+  --surface-hover: #f5f0e8;
+  --shadow: 0 2px 8px rgba(45,42,38,0.08);
+  --shadow-hover: 0 8px 24px rgba(45,42,38,0.12);
+  --shadow-accent: 0 4px 16px rgba(178,34,34,0.15);
 }
 
 html.dark {
-  --bg: #141210;
-  --bg-secondary: #1c1a17;
-  --text: #ede9e3;
-  --text-secondary: #9c9590;
-  --text-muted: #6b6560;
-  --accent: #e8793a;
-  --accent-hover: #f09560;
-  --border: #2a2723;
-  --border-hover: #3a3632;
-  --surface: #1c1a17;
-  --surface-hover: #242220;
-  --shadow: 0 2px 8px rgba(0,0,0,0.2);
-  --shadow-hover: 0 8px 24px rgba(0,0,0,0.3);
-  --shadow-accent: 0 4px 16px rgba(232,121,58,0.2);
+  --bg: #1a1816;
+  --bg-secondary: #242220;
+  --text: #e8e4dc;
+  --text-secondary: #a09890;
+  --text-muted: #706860;
+  --accent: #cd5c5c;
+  --accent-hover: #e06060;
+  --border: #3a3632;
+  --border-hover: #4a4642;
+  --surface: #242220;
+  --surface-hover: #2e2c28;
+  --shadow: 0 2px 8px rgba(0,0,0,0.25);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.35);
+  --shadow-accent: 0 4px 16px rgba(205,92,92,0.2);
+}
+
+html[data-accent="zhuhong"] {
+  --accent: #c41d1d;
+  --accent-hover: #a01616;
+  --shadow-accent: 0 4px 16px rgba(196,29,29,0.15);
+}
+
+html[data-accent="zhuhong"].dark {
+  --accent: #e74c3c;
+  --accent-hover: #f25c5c;
+  --shadow-accent: 0 4px 16px rgba(231,76,60,0.2);
+}
+
+html[data-accent="qinghua"] {
+  --accent: #2e8b57;
+  --accent-hover: #228b22;
+  --shadow-accent: 0 4px 16px rgba(46,139,87,0.15);
+}
+
+html[data-accent="qinghua"].dark {
+  --accent: #3cb371;
+  --accent-hover: #4eca8c;
+  --shadow-accent: 0 4px 16px rgba(60,179,113,0.2);
+}
+
+html[data-accent="dianqing"] {
+  --accent: #4a6fa5;
+  --accent-hover: #3a5f95;
+  --shadow-accent: 0 4px 16px rgba(74,111,165,0.15);
+}
+
+html[data-accent="dianqing"].dark {
+  --accent: #6495ed;
+  --accent-hover: #7aabff;
+  --shadow-accent: 0 4px 16px rgba(100,149,237,0.2);
+}
+
+html[data-accent="tanhua"] {
+  --accent: #cd853f;
+  --accent-hover: #b8732e;
+  --shadow-accent: 0 4px 16px rgba(205,133,63,0.15);
+}
+
+html[data-accent="tanhua"].dark {
+  --accent: #daa06d;
+  --accent-hover: #e8b080;
+  --shadow-accent: 0 4px 16px rgba(218,160,109,0.2);
+}
+
+html[data-accent="ziyao"] {
+  --accent: #7b68ee;
+  --accent-hover: #6a5acd;
+  --shadow-accent: 0 4px 16px rgba(123,104,238,0.15);
+}
+
+html[data-accent="ziyao"].dark {
+  --accent: #9370db;
+  --accent-hover: #a88de8;
+  --shadow-accent: 0 4px 16px rgba(147,112,219,0.2);
 }
 
 @theme inline {
