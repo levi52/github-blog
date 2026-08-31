@@ -43,10 +43,12 @@ function getAllPostsRaw(): PostData[] {
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data } = matter(fileContents);
 
+      const date = data.date ? (data.date instanceof Date ? data.date.toISOString().split("T")[0] : String(data.date)) : "";
+
       return {
         slug,
         title: data.title || "",
-        date: data.date || "",
+        date,
         summary: data.summary || "",
         categories: data.categories || [],
         tags: data.tags || [],
@@ -85,10 +87,12 @@ export function getPostBySlug(slug: string): PostContent | null {
   const processedContent = remark().use(html).processSync(content);
   const contentHtml = processedContent.toString();
 
+  const date = data.date ? (data.date instanceof Date ? data.date.toISOString().split("T")[0] : String(data.date)) : "";
+
   return {
     slug,
     title: data.title || "",
-    date: data.date || "",
+    date,
     summary: data.summary || "",
     categories: data.categories || [],
     tags: data.tags || [],

@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
       { href: "/blog/", label: "全部文章" },
       { href: "/blog/?view=categories", label: "全部分类" },
       { href: "/blog/?view=tags", label: "全部标签" },
+      { href: "/blog/?view=series", label: "全部系列" },
     ],
   },
   { href: "/tools/", label: "工具" },

@@ -12,6 +12,7 @@ import {
   getPostsByCategoryClient,
   getPostsByTagClient,
   searchPostsClient,
+  getAllSeriesClient,
 } from "@/lib/posts-client";
 import type { PostData } from "@/lib/posts";
 
@@ -60,13 +61,15 @@ function BlogContent() {
     acc[cat] = getPostsByCategoryClient(cat).length;
     return acc;
   }, {} as Record<string, number>);
+  const series = getAllSeriesClient();
 
   const buildHref = (key: string, value: string) =>
     `/blog/?${key}=${encodeURIComponent(value)}`;
 
   const isCategoriesView = view === "categories";
   const isTagsView = view === "tags";
-  const isDefaultView = !isCategoriesView && !isTagsView;
+  const isSeriesView = view === "series";
+  const isDefaultView = !isCategoriesView && !isTagsView && !isSeriesView;
 
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const currentPage = Math.max(1, Math.min(page, totalPages));
@@ -83,9 +86,9 @@ function BlogContent() {
       <div className="mb-10 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-3">Archive</p>
         <h1 className="text-3xl font-bold tracking-tight">
-          {isCategoriesView ? "全部分类" : isTagsView ? "全部标签" : "Blog"}
+          {isCategoriesView ? "全部分类" : isTagsView ? "全部标签" : isSeriesView ? "全部系列" : "Blog"}
         </h1>
-        {(isCategoriesView || isTagsView) && (
+        {(isCategoriesView || isTagsView || isSeriesView) && (
           <Link href="/blog/" className="text-sm text-text-muted hover:text-accent transition-colors duration-200 mt-2 inline-flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -167,6 +170,33 @@ function BlogContent() {
                 {tagCounts[t] || 0}
               </span>
             </Link>
+          ))}
+        </div>
+      ) : isSeriesView ? (
+        <div className="space-y-6 animate-slide-in-up">
+          {series.map((s) => (
+            <div key={s.name} className="p-6 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-text">{s.name}</h3>
+                <span className="text-sm text-text-muted bg-bg-secondary px-3 py-1 rounded-full">
+                  {s.posts.length} 篇
+                </span>
+              </div>
+              <div className="space-y-2">
+                {s.posts.map((post, i) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}/`}
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-bg-secondary transition-colors duration-200 group"
+                  >
+                    <span className="text-xs text-text-muted font-mono w-6">{i + 1}</span>
+                    <span className="text-sm text-text group-hover:text-accent transition-colors duration-200">
+                      {post.title}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       ) : (

@@ -1,10 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-html {
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
 :root {
   --bg: #f5f0e8;
   --bg-secondary: #ebe5d9;
@@ -300,12 +296,17 @@ html.dark .code-block-wrapper {
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
 
-@keyframes theme-toggle {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(0.8) rotate(180deg); }
-  100% { transform: scale(1) rotate(360deg); }
+/* Dark mode spread animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-.animate-theme-toggle {
-  animation: theme-toggle 0.4s ease-in-out;
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 999;
 }

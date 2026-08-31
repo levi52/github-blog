@@ -1,24 +1,77 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
+function isReducedMotion() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const darkRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem("theme");
-    const isDark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setDark(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
+    const isDarkMode = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setDark(isDarkMode);
+    darkRef.current = isDarkMode;
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, []);
 
-  const toggle = () => {
+  const toggle = (e: React.MouseEvent) => {
     const next = !dark;
-    setDark(next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", next);
+    const x = e.clientX;
+    const y = e.clientY;
+
+    const startViewTransition = (document as any).startViewTransition;
+    if (!startViewTransition || isReducedMotion()) {
+      setDark(next);
+      darkRef.current = next;
+      localStorage.setItem("theme", next ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", next);
+      return;
+    }
+
+    const transition = startViewTransition.call(document, () => {
+      document.documentElement.classList.toggle("dark", next);
+    });
+
+    transition.ready.then(() => {
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+
+      document.documentElement.animate(
+        {
+          clipPath,
+        },
+        {
+          duration: 500,
+          easing: "ease-in",
+          pseudoElement: "::view-transition-new(root)",
+        },
+      );
+
+      setTimeout(() => {
+        setDark(next);
+        darkRef.current = next;
+        localStorage.setItem("theme", next ? "dark" : "light");
+      }, 500);
+    });
   };
 
   if (!mounted) {
@@ -27,6 +80,7 @@ export default function ThemeToggle() {
 
   return (
     <button
+      ref={btnRef}
       onClick={toggle}
       className="w-9 h-9 flex items-center justify-center rounded-lg border border-border hover:border-border-hover hover:bg-surface-hover transition-colors duration-200"
       aria-label="Toggle theme"
@@ -34,7 +88,7 @@ export default function ThemeToggle() {
       <div className="relative w-4 h-4">
         {dark ? (
           <svg
-            className="absolute inset-0 w-4 h-4 text-text-secondary animate-theme-toggle"
+            className="absolute inset-0 w-4 h-4 text-text-secondary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -43,7 +97,7 @@ export default function ThemeToggle() {
           </svg>
         ) : (
           <svg
-            className="absolute inset-0 w-4 h-4 text-text-secondary animate-theme-toggle"
+            className="absolute inset-0 w-4 h-4 text-text-secondary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
