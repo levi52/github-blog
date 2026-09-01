@@ -132,13 +132,13 @@ export default function ToolsPage() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="mb-10 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-3">Utilities</p>
-        <h1 className="text-3xl font-bold tracking-tight">Tools</h1>
+        <h1 className="font-heading text-3xl tracking-tight">Tools</h1>
       </div>
 
       <div className="space-y-10">
         {categories.map((category, catIndex) => (
           <div key={category.name} className={`animate-slide-in-up delay-${(catIndex + 1) * 100}`}>
-            <h2 className="text-lg font-semibold text-text mb-4">{category.name}</h2>
+            <h2 className="font-heading text-lg text-text mb-4">{category.name}</h2>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {category.tools.map((tool) => {
                 const Icon = tool.icon;

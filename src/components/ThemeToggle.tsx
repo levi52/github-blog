@@ -83,7 +83,7 @@ export default function ThemeToggle() {
     <button
       ref={btnRef}
       onClick={toggle}
-      className="w-9 h-9 flex items-center justify-center rounded-lg border border-border hover:border-border-hover hover:bg-surface-hover transition-colors duration-200"
+      className="w-9 h-9 flex items-center justify-center rounded-lg border border-border hover:border-border-hover hover:bg-surface-hover transition-colors duration-200 cursor-pointer"
       aria-label="Toggle theme"
     >
       <div className="relative w-4 h-4">

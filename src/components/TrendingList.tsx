@@ -78,7 +78,7 @@ export default function TrendingList() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="mb-10 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-3">Trending</p>
-        <h1 className="text-3xl font-bold tracking-tight">GitHub 每周热门</h1>
+        <h1 className="font-heading text-3xl tracking-tight">GitHub 每周热门</h1>
         <p className="text-text-secondary mt-2">本周热门开源项目</p>
       </div>
 
@@ -139,10 +139,10 @@ export default function TrendingList() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedLang("")}
-            className={`px-4 py-2 text-sm rounded-full transition-all duration-200 ${
+            className={`px-4 py-2 text-sm rounded-full cursor-pointer transition-all duration-200 ${
               selectedLang === ""
                 ? "bg-accent text-white shadow-[var(--shadow-accent)]"
-                : "bg-surface border border-border text-text-secondary hover:text-text hover:border-border-hover"
+                : "bg-bg-secondary border border-border text-text-muted hover:text-text hover:border-accent hover:bg-accent/5 hover:shadow-md"
             }`}
           >
             All
@@ -151,10 +151,10 @@ export default function TrendingList() {
             <button
               key={lang}
               onClick={() => setSelectedLang(lang)}
-              className={`px-4 py-2 text-sm rounded-full transition-all duration-200 ${
+              className={`px-4 py-2 text-sm rounded-full cursor-pointer transition-all duration-200 ${
                 selectedLang === lang
                   ? "bg-accent text-white shadow-[var(--shadow-accent)]"
-                  : "bg-surface border border-border text-text-secondary hover:text-text hover:border-border-hover"
+                  : "bg-bg-secondary border border-border text-text-muted hover:text-text hover:border-accent hover:bg-accent/5 hover:shadow-md"
               }`}
             >
               {lang}
@@ -164,58 +164,66 @@ export default function TrendingList() {
       </div>
 
       {/* 项目列表 */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {filteredRepos.map((repo, i) => (
           <a
             key={`${repo.owner}/${repo.repo}`}
             href={repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`block p-5 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300 animate-slide-in-up delay-${Math.min((i + 3) * 50, 500)}`}
+            className={`group flex items-center gap-4 p-4 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300 animate-slide-in-up delay-${Math.min((i + 3) * 50, 500)}`}
           >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-sm font-semibold text-text group-hover:text-accent transition-colors duration-200 truncate">
-                    <span className="text-text-muted">{repo.owner} /</span> {repo.repo}
-                  </h3>
-                </div>
-                <p className="text-xs text-text-secondary leading-relaxed mb-3 line-clamp-2">
-                  {repo.description}
-                </p>
-                <div className="flex items-center flex-wrap gap-3 text-xs text-text-muted">
-                  {repo.language && (
-                    <span className="flex items-center gap-1.5">
-                      <span
-                        className="w-2.5 h-2.5 rounded-full"
-                        style={{ backgroundColor: repo.langColor || "#999" }}
-                      ></span>
-                      {repo.language}
-                    </span>
-                  )}
-                  <span className="flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.782 1.4 8.171L12 19.896l-7.334 3.268 1.4-8.171L.132 9.211l8.2-1.193z"/>
-                    </svg>
-                    {formatNumber(repo.stars)}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
-                    </svg>
-                    {formatNumber(repo.forks)}
-                  </span>
-                </div>
+            {/* Rank Number */}
+            <div className="shrink-0 w-10 flex items-center justify-center">
+              <span className="font-heading text-2xl text-text-muted leading-none">
+                {i + 1}
+              </span>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-sm font-semibold text-text group-hover:text-accent transition-colors duration-200 truncate">
+                  <span className="text-text-muted">{repo.owner} /</span> {repo.repo}
+                </h3>
               </div>
-              <div className="shrink-0 flex items-center gap-1 px-3 py-1.5 bg-bg-secondary rounded-full">
-                <svg className="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.782 1.4 8.171L12 19.896l-7.334 3.268 1.4-8.171L.132 9.211l8.2-1.193z"/>
-                </svg>
-                <span className="text-xs font-medium text-text">
-                  +{formatNumber(repo.todayStars)}
+              <p className="text-xs text-text-secondary leading-relaxed mb-2 line-clamp-1">
+                {repo.description}
+              </p>
+              <div className="flex items-center flex-wrap gap-3 text-xs text-text-muted">
+                {repo.language && (
+                  <span className="flex items-center gap-1.5">
+                    <span
+                      className="w-2.5 h-2.5 rounded-full"
+                      style={{ backgroundColor: repo.langColor || "#999" }}
+                    ></span>
+                    {repo.language}
+                  </span>
+                )}
+                <span className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.782 1.4 8.171L12 19.896l-7.334 3.268 1.4-8.171L.132 9.211l8.2-1.193z"/>
+                  </svg>
+                  {formatNumber(repo.stars)}
                 </span>
-                <span className="text-xs text-text-muted">/week</span>
+                <span className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
+                  </svg>
+                  {formatNumber(repo.forks)}
+                </span>
               </div>
+            </div>
+
+            {/* Star Growth Badge */}
+            <div className="shrink-0 flex items-center gap-1 px-3 py-1.5 bg-accent/10 rounded-full">
+              <svg className="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.782 1.4 8.171L12 19.896l-7.334 3.268 1.4-8.171L.132 9.211l8.2-1.193z"/>
+              </svg>
+              <span className="text-xs font-medium text-accent">
+                +{formatNumber(repo.todayStars)}
+              </span>
+              <span className="text-xs text-text-muted">/w</span>
             </div>
           </a>
         ))}

@@ -23,7 +23,7 @@ export default function NotFound() {
           </div>
         </div>
 
-        <h2 className={`text-2xl font-semibold tracking-tight mb-4 transition-all duration-1000 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <h2 className={`font-heading text-2xl tracking-tight mb-4 transition-all duration-1000 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           页面不存在
         </h2>
 

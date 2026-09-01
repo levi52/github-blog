@@ -17,7 +17,7 @@ export default function AboutPage() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="mb-10 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-3">About</p>
-        <h1 className="text-3xl font-bold tracking-tight">关于</h1>
+        <h1 className="font-heading text-3xl tracking-tight">关于</h1>
       </div>
 
       <section className="flex flex-col md:flex-row gap-10 mb-16 animate-slide-in-up delay-100">
@@ -65,7 +65,7 @@ export default function AboutPage() {
       </section>
 
       <section>
-        <h2 className="text-xl font-semibold tracking-tight mb-6 animate-slide-in-up delay-200">开源项目</h2>
+        <h2 className="font-heading text-xl tracking-tight mb-6 animate-slide-in-up delay-200">开源项目</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {repos.map((repo, i) => (
             <a

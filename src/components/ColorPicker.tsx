@@ -54,7 +54,7 @@ export default function ColorPicker() {
           <button
             key={option.id}
             onClick={() => handleColorChange(option.id)}
-            className={`group flex flex-col items-center gap-2 p-3 rounded-lg border transition-all duration-200 ${
+            className={`group flex flex-col items-center gap-2 p-3 rounded-lg border transition-all duration-200 cursor-pointer ${
               selectedColor === option.id
                 ? "border-accent bg-accent/10"
                 : "border-border hover:border-border-hover hover:bg-bg-secondary"

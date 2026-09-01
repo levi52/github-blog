@@ -12,7 +12,7 @@ export default function Home() {
     <div className="max-w-5xl mx-auto px-6">
       <section className="pt-20 pb-16 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-4">Welcome</p>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+        <h1 className="font-heading text-4xl md:text-5xl tracking-tight leading-tight mb-6">
           Hi, I&apos;m{" "}
           <span className="text-accent">
             <Typewriter text="Levi5" speed={150} delay={500} />
@@ -39,7 +39,7 @@ export default function Home() {
 
       <section className="pb-20">
         <div className="flex items-baseline justify-between mb-8 animate-slide-in-up delay-200">
-          <h2 className="text-xl font-semibold tracking-tight">Recent Posts</h2>
+          <h2 className="font-heading text-xl tracking-tight">Recent Posts</h2>
           <Link href="/blog/" className="text-sm text-text-muted hover:text-accent transition-colors duration-200">
             View all &rarr;
           </Link>

@@ -84,7 +84,7 @@ function BlogContent() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="mb-10 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-3">Archive</p>
-        <h1 className="text-3xl font-bold tracking-tight">
+        <h1 className="font-heading text-3xl tracking-tight">
           {isCategoriesView ? "全部分类" : isTagsView ? "全部标签" : isSeriesView ? "全部系列" : "Blog"}
         </h1>
         {(isCategoriesView || isTagsView || isSeriesView) && (
@@ -146,7 +146,7 @@ function BlogContent() {
               className="group p-6 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300"
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-text group-hover:text-accent transition-colors duration-200">
+                  <h3 className="text-lg font-semibold text-text group-hover:text-accent transition-colors duration-200">
                   {cat}
                 </h3>
                 <span className="text-sm text-text-muted bg-bg-secondary px-3 py-1 rounded-full">
@@ -205,7 +205,7 @@ function BlogContent() {
               sortedYears.map((year) => (
                 <div key={year} className="animate-slide-in-up">
                   <div className="flex items-center gap-4 mb-4">
-                    <h2 className="text-2xl font-bold text-text">{year}</h2>
+                    <h2 className="font-heading text-2xl text-text">{year}</h2>
                     <span className="text-sm text-text-muted bg-bg-secondary px-3 py-1 rounded-full">
                       {postsByYear[year].length} 篇
                     </span>
@@ -298,7 +298,7 @@ function BlogContent() {
                         className={`group text-xs px-3 py-1.5 rounded-full transition-all duration-200 flex items-center gap-1.5 ${
                           tag === t
                             ? "bg-accent text-white shadow-[var(--shadow-accent)]"
-                            : "bg-bg-secondary text-text-muted hover:text-text hover:bg-accent/10 hover:scale-105"
+                            : "bg-bg-secondary text-text-muted hover:text-text hover:bg-accent/10"
                         }`}
                       >
                         <span>{t}</span>

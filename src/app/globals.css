@@ -109,6 +109,7 @@ html[data-accent="ziyao"].dark {
   --color-surface-hover: var(--surface-hover);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-instrument-serif), "Noto Serif SC", serif;
 }
 
 body {
@@ -116,6 +117,35 @@ body {
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Paper grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  filter: url(#paper-grain);
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+}
+
+html.dark body::after {
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+}
+
+@media (max-width: 768px) {
+  body::after { opacity: 0.04; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { display: none; }
+}
+
+.font-heading {
+  font-family: var(--font-heading);
 }
 
 ::selection {
@@ -198,19 +228,6 @@ img {
 
 .animate-dropdown-in {
   animation: dropdownIn 0.2s ease-out forwards;
-}
-
-@keyframes tagFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-}
-
-.tag-hover-animation:hover {
-  animation: tagFloat 0.3s ease-in-out;
 }
 
 /* Button click feedback */
