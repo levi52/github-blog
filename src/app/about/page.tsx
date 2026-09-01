@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Image from "next/image";
 import githubData from "@/lib/github-data.json";
 import ColorPicker from "@/components/ColorPicker";
 
@@ -22,9 +22,11 @@ export default function AboutPage() {
 
       <section className="flex flex-col md:flex-row gap-10 mb-16 animate-slide-in-up delay-100">
         <div className="shrink-0">
-          <img
+          <Image
             src={profile.avatar}
             alt={profile.name}
+            width={128}
+            height={128}
             className="w-32 h-32 rounded-2xl border border-border hover:border-accent hover:shadow-lg transition-all duration-300"
           />
         </div>

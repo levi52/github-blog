@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function ShareButton({ title, url }: { title: string; url: string }) {
+export default function ShareButton({ url }: { title?: string; url: string }) {
   const [copied, setCopied] = useState(false);
 
   const getFullUrl = () => {

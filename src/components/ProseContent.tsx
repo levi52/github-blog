@@ -51,9 +51,10 @@ export default function ProseContent({ html }: ProseContentProps) {
       img.parentNode?.insertBefore(wrapper, img);
       img.remove();
 
-      const { createRoot } = require("react-dom/client");
-      const reactRoot = createRoot(root);
-      reactRoot.render(<ImageLightbox src={src} alt={alt} />);
+      import("react-dom/client").then(({ createRoot }) => {
+        const reactRoot = createRoot(root);
+        reactRoot.render(<ImageLightbox src={src} alt={alt} />);
+      });
     });
 
     const preBlocks = contentRef.current.querySelectorAll("pre:not(.processed)");

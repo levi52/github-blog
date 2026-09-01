@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { PostData } from "@/lib/posts";
 import HighlightText from "@/components/HighlightText";
 
@@ -9,9 +10,11 @@ export default function PostCard({ post, query }: { post: PostData; query?: stri
         {post.coverImage && (
           <Link href={`/blog/${post.slug}/`} className="shrink-0">
             <div className="w-32 h-24 rounded-lg overflow-hidden bg-bg-secondary">
-              <img
+              <Image
                 src={post.coverImage}
                 alt={post.title}
+                width={128}
+                height={96}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>

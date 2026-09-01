@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 interface ImageLightboxProps {
   src: string;
@@ -14,7 +15,7 @@ export default function ImageLightbox({ src, alt, className }: ImageLightboxProp
   const [imgSrc, setImgSrc] = useState("");
 
   useEffect(() => {
-    const img = new Image();
+    const img = new window.Image();
     img.src = src;
     img.onload = () => {
       setImgSrc(src);
@@ -44,11 +45,12 @@ export default function ImageLightbox({ src, alt, className }: ImageLightboxProp
         onClick={() => setIsOpen(true)}
       >
         {isLoaded ? (
-          <img
+          <Image
             src={imgSrc}
             alt={alt}
+            width={800}
+            height={600}
             className="w-full h-auto rounded-xl border border-border transition-all duration-300 group-hover:shadow-[var(--shadow-hover)] group-hover:scale-[1.02]"
-            loading="lazy"
           />
         ) : (
           <div className="w-full h-48 bg-bg-secondary rounded-xl animate-pulse" />
@@ -83,9 +85,11 @@ export default function ImageLightbox({ src, alt, className }: ImageLightboxProp
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <img
+          <Image
             src={src}
             alt={alt}
+            width={1200}
+            height={800}
             className="max-w-full max-h-[90vh] object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />

@@ -10,6 +10,13 @@ interface Stats {
   nodes: number;
 }
 
+interface XMindNode {
+  title?: string;
+  children?: {
+    attached?: XMindNode[];
+  };
+}
+
 function pushLine(depth: number, title: string, lines: string[]) {
   if (depth === 0) lines.push("# " + title + "\n");
   else if (depth === 1) lines.push("## " + title + "\n");
@@ -17,7 +24,7 @@ function pushLine(depth: number, title: string, lines: string[]) {
   else lines.push("  ".repeat(depth - 3) + "- " + title);
 }
 
-function emitJson(node: any, depth: number, lines: string[], st: Stats) {
+function emitJson(node: XMindNode, depth: number, lines: string[], st: Stats) {
   st.nodes += 1;
   const title = (node.title || "").trim();
   pushLine(depth, title, lines);
@@ -25,12 +32,13 @@ function emitJson(node: any, depth: number, lines: string[], st: Stats) {
   for (const c of children) emitJson(c, depth + 1, lines, st);
 }
 
-function parseJson(data: any[], lines: string[], st: Stats) {
+function parseJson(data: XMindNode[], lines: string[], st: Stats) {
   for (const sheet of data) {
     st.sheets += 1;
-    emitJson(sheet.rootTopic, 0, lines, st);
+    emitJson((sheet as XMindNode & { rootTopic?: XMindNode }).rootTopic || {}, 0, lines, st);
+    const rootTopic = (sheet as XMindNode & { rootTopic?: XMindNode }).rootTopic;
     const attached =
-      (sheet.rootTopic && sheet.rootTopic.children && sheet.rootTopic.children.attached) || [];
+      (rootTopic && rootTopic.children && rootTopic.children.attached) || [];
     st.topics += attached.length;
     if (lines.length && lines[lines.length - 1] !== "") lines.push("");
   }
@@ -145,8 +153,9 @@ export default function XMindToMdTool() {
       setStats(st);
       setRaw(md);
       setPreview(marked.parse(md) as string);
-    } catch (err: any) {
-      setError("解析失败：" + (err?.message || err));
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      setError("解析失败：" + message);
     } finally {
       setConverting(false);
     }

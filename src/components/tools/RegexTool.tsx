@@ -142,7 +142,7 @@ export default function RegexTool() {
               {matches.map((m, i) => (
                 <div key={i} className="flex items-center gap-4 text-sm font-mono p-2 bg-bg rounded-lg">
                   <span className="text-text-muted">#{i + 1}</span>
-                  <span className="text-accent">"{m.match}"</span>
+                  <span className="text-accent">&quot;{m.match}&quot;</span>
                   <span className="text-text-muted">位置: {m.index}</span>
                   {m.groups.length > 0 && (
                     <span className="text-text-muted">分组: [{m.groups.join(", ")}]</span>

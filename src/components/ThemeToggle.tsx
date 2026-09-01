@@ -14,6 +14,7 @@ export default function ThemeToggle() {
   const darkRef = useRef(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const saved = localStorage.getItem("theme");
     const isDarkMode = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -31,7 +32,7 @@ export default function ThemeToggle() {
     const x = e.clientX;
     const y = e.clientY;
 
-    const startViewTransition = (document as any).startViewTransition;
+    const startViewTransition = (document as Document & { startViewTransition?: (cb: () => void) => { ready: Promise<void> } }).startViewTransition;
     if (!startViewTransition || isReducedMotion()) {
       setDark(next);
       darkRef.current = next;

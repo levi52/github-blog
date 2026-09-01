@@ -49,6 +49,7 @@ export default function Header() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);

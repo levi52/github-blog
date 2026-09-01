@@ -25,6 +25,7 @@ export default function ColorPicker() {
   useEffect(() => {
     const saved = localStorage.getItem("accent-color");
     if (saved) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedColor(saved);
       document.documentElement.setAttribute("data-accent", saved);
     }

@@ -9,6 +9,7 @@ export default function FontSizeAdjuster() {
     const saved = localStorage.getItem("fontSize");
     if (saved) {
       const size = parseInt(saved, 10);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFontSize(size);
       const prose = document.querySelector(".prose");
       if (prose) {

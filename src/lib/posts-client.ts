@@ -61,7 +61,7 @@ export function searchPostsClient(query: string): PostData[] {
 }
 
 export function getAllSeriesClient(): SeriesData[] {
-  return (postsData as any).series || [];
+  return (postsData as { series?: SeriesData[] }).series || [];
 }
 
 export function getSeriesByNameClient(name: string): SeriesData | null {

@@ -69,7 +69,6 @@ function BlogContent() {
   const isCategoriesView = view === "categories";
   const isTagsView = view === "tags";
   const isSeriesView = view === "series";
-  const isDefaultView = !isCategoriesView && !isTagsView && !isSeriesView;
 
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const currentPage = Math.max(1, Math.min(page, totalPages));

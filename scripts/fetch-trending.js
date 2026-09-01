@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require("fs");
 const path = require("path");
 const cheerio = require("cheerio");
@@ -122,7 +123,7 @@ async function main() {
   if (fs.existsSync(OUTPUT_FILE)) {
     try {
       existingData = JSON.parse(fs.readFileSync(OUTPUT_FILE, "utf-8"));
-    } catch (e) {
+    } catch {
       console.log("Existing data file is invalid, starting fresh");
     }
   }
