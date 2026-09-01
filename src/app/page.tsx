@@ -1,16 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import PostCard from "@/components/PostCard";
+import Typewriter from "@/components/Typewriter";
 import postsData from "@/lib/posts-data.json";
 
 export default function Home() {
-  const recentPosts = postsData.posts.slice(0, 5);
+  const recentPosts = postsData.posts.slice(0, 4);
 
   return (
     <div className="max-w-5xl mx-auto px-6">
       <section className="pt-20 pb-16 animate-slide-in-up">
         <p className="text-sm text-text-muted tracking-widest uppercase mb-4">Welcome</p>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-          Hi, I&apos;m <span className="text-accent">Levi5</span>
+          Hi, I&apos;m{" "}
+          <span className="text-accent">
+            <Typewriter text="Levi5" speed={150} delay={500} />
+          </span>
         </h1>
         <p className="text-lg text-text-secondary max-w-xl leading-relaxed">
           I write about programming, technology, and things I find interesting.
@@ -18,13 +24,13 @@ export default function Home() {
         <div className="mt-8 flex items-center gap-4">
           <Link
             href="/about/"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-text text-bg text-sm font-medium rounded-full hover:shadow-[var(--shadow-hover)] hover:scale-105 active:scale-95 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-text text-bg text-sm font-medium rounded-full hover:brightness-110 hover:shadow-lg transition-all duration-300 ease-out"
           >
             About
           </Link>
           <Link
             href="/blog/"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-sm font-medium rounded-full hover:border-border-hover hover:bg-surface-hover hover:shadow-[var(--shadow)] transition-all duration-200"
+            className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-sm font-medium rounded-full hover:border-accent hover:bg-accent/5 hover:shadow-md transition-all duration-300 ease-out"
           >
             View Blog
           </Link>
