@@ -27,6 +27,7 @@ const navItems: NavItem[] = [
     ],
   },
   { href: "/tools/", label: "工具" },
+  { href: "/trending/", label: "Trending" },
   { href: "/about/", label: "关于" },
 ];
 

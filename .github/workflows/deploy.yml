@@ -35,6 +35,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Fetch Trending data
+        run: node scripts/fetch-trending.js
+
       - name: Build
         run: npm run build
 

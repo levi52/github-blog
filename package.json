@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",
+    "cheerio": "^1.2.0",
     "gray-matter": "^4.0.3",
     "jszip": "^3.10.1",
     "marked": "^18.0.11",
