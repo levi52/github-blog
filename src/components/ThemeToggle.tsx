@@ -1,48 +1,24 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-
-function isReducedMotion() {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
+import { useRef } from "react";
+import { useTheme } from "@/lib/useTheme";
 
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const { isDark, isMounted, toggleTheme, isReducedMotion } = useTheme();
   const btnRef = useRef<HTMLButtonElement>(null);
-  const darkRef = useRef(false);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-    const saved = localStorage.getItem("theme");
-    const isDarkMode = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setDark(isDarkMode);
-    darkRef.current = isDarkMode;
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  const toggle = (e: React.MouseEvent) => {
-    const next = !dark;
+  const handleToggle = (e: React.MouseEvent) => {
     const x = e.clientX;
     const y = e.clientY;
 
     const startViewTransition = (document as Document & { startViewTransition?: (cb: () => void) => { ready: Promise<void> } }).startViewTransition;
     if (!startViewTransition || isReducedMotion()) {
-      setDark(next);
-      darkRef.current = next;
-      localStorage.setItem("theme", next ? "dark" : "light");
-      document.documentElement.classList.toggle("dark", next);
+      toggleTheme();
       return;
     }
 
     const transition = startViewTransition.call(document, () => {
-      document.documentElement.classList.toggle("dark", next);
+      toggleTheme();
     });
 
     transition.ready.then(() => {
@@ -66,28 +42,22 @@ export default function ThemeToggle() {
           pseudoElement: "::view-transition-new(root)",
         },
       );
-
-      setTimeout(() => {
-        setDark(next);
-        darkRef.current = next;
-        localStorage.setItem("theme", next ? "dark" : "light");
-      }, 500);
     });
   };
 
-  if (!mounted) {
+  if (!isMounted) {
     return <div className="w-9 h-9" />;
   }
 
   return (
     <button
       ref={btnRef}
-      onClick={toggle}
+      onClick={handleToggle}
       className="w-9 h-9 flex items-center justify-center rounded-lg border border-border hover:border-border-hover hover:bg-surface-hover transition-colors duration-200 cursor-pointer"
-      aria-label="Toggle theme"
+      aria-label={isDark ? "切换到亮色模式" : "切换到暗色模式"}
     >
       <div className="relative w-4 h-4">
-        {dark ? (
+        {isDark ? (
           <svg
             className="absolute inset-0 w-4 h-4 text-text-secondary"
             fill="none"

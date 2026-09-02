@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useTheme, type AccentColor } from "@/lib/useTheme";
 
 interface ColorOption {
-  id: string;
+  id: AccentColor;
   name: string;
   color: string;
   darkColor: string;
@@ -19,43 +19,22 @@ const colorOptions: ColorOption[] = [
 ];
 
 export default function ColorPicker() {
-  const [selectedColor, setSelectedColor] = useState("default");
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("accent-color");
-    if (saved) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelectedColor(saved);
-      document.documentElement.setAttribute("data-accent", saved);
-    }
-
-    const darkMode = localStorage.getItem("theme") === "dark" ||
-      (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    setIsDark(darkMode);
-  }, []);
-
-  const handleColorChange = (colorId: string) => {
-    setSelectedColor(colorId);
-    localStorage.setItem("accent-color", colorId);
-    if (colorId === "default") {
-      document.documentElement.removeAttribute("data-accent");
-    } else {
-      document.documentElement.setAttribute("data-accent", colorId);
-    }
-  };
+  const { accentColor, isDark, setAccentColor } = useTheme();
 
   return (
     <div className="p-6 bg-surface border border-border rounded-xl">
       <h3 className="text-lg font-semibold text-text mb-4">主题配色</h3>
       <p className="text-sm text-text-muted mb-4">选择你喜欢的强调色</p>
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+      <div role="radiogroup" aria-label="主题配色选择" className="grid grid-cols-3 sm:grid-cols-6 gap-3">
         {colorOptions.map((option) => (
           <button
             key={option.id}
-            onClick={() => handleColorChange(option.id)}
+            role="radio"
+            aria-checked={accentColor === option.id}
+            aria-label={`${option.name}主题`}
+            onClick={() => setAccentColor(option.id)}
             className={`group flex flex-col items-center gap-2 p-3 rounded-lg border transition-all duration-200 cursor-pointer ${
-              selectedColor === option.id
+              accentColor === option.id
                 ? "border-accent bg-accent/10"
                 : "border-border hover:border-border-hover hover:bg-bg-secondary"
             }`}
@@ -63,9 +42,10 @@ export default function ColorPicker() {
             <div
               className="w-8 h-8 rounded-full border-2 border-surface shadow-md group-hover:scale-110 transition-transform duration-200"
               style={{ backgroundColor: isDark ? option.darkColor : option.color }}
+              aria-hidden="true"
             />
             <span className={`text-xs ${
-              selectedColor === option.id ? "text-accent font-medium" : "text-text-muted"
+              accentColor === option.id ? "text-accent font-medium" : "text-text-muted"
             }`}>
               {option.name}
             </span>
