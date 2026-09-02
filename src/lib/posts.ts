@@ -6,6 +6,12 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
+function resolvePostPath(relative: string): string | null {
+  const base = path.resolve(postsDirectory);
+  const fullPath = path.resolve(base, relative);
+  return fullPath.startsWith(base + path.sep) ? fullPath : null;
+}
+
 export interface PostData {
   slug: string;
   title: string;
@@ -37,15 +43,17 @@ function getAllPostsRaw(): PostData[] {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames
     .filter((name) => name.endsWith(".md"))
-    .map((fileName) => {
+    .flatMap((fileName) => {
+      const fullPath = resolvePostPath(fileName);
+      if (!fullPath) return [];
+
       const slug = fileName.replace(/\.md$/, "");
-      const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data } = matter(fileContents);
 
       const date = data.date ? (data.date instanceof Date ? data.date.toISOString().split("T")[0] : String(data.date)) : "";
 
-      return {
+      return [{
         slug,
         title: data.title || "",
         date,
@@ -57,7 +65,7 @@ function getAllPostsRaw(): PostData[] {
         draft: data.draft || false,
         series: data.series || undefined,
         seriesOrder: data.seriesOrder || undefined,
-      };
+      }];
     });
 
   return allPostsData.sort((a, b) => {
@@ -76,8 +84,8 @@ export function getAllPostsIncludingDrafts(): PostData[] {
 }
 
 export function getPostBySlug(slug: string): PostContent | null {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
-  if (!fs.existsSync(fullPath)) {
+  const fullPath = resolvePostPath(`${slug}.md`);
+  if (!fullPath || !fs.existsSync(fullPath)) {
     return null;
   }
 

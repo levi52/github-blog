@@ -50,7 +50,7 @@
 
 ### 环境要求
 
-- Node.js ≥ 18
+- Node.js ≥ 20.9（Next.js 16 要求）
 
 ### 安装
 
@@ -72,8 +72,9 @@ npm run dev
 
 ```bash
 npm run build
-npm run deploy
 ```
+
+推送到 `main` 分支后，GitHub Actions 会自动构建并部署到 GitHub Pages（见 `.github/workflows/deploy.yml`）。
 
 ## 📁 项目结构
 
@@ -107,8 +108,9 @@ npm run deploy
 npm run dev          # 启动开发服务器
 npm run build        # 构建生产版本
 npm run lint         # 代码检查
-npm run deploy       # 部署到 GitHub Pages
 ```
+
+部署由 GitHub Actions 在推送 `main` 分支时自动完成。
 
 ## 📄 License
 

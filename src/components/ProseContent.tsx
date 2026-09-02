@@ -57,6 +57,9 @@ export default function ProseContent({ html }: ProseContentProps) {
       });
     });
 
+    // Touch devices have no hover: keep the copy button always visible
+    const hasHover = window.matchMedia("(hover: hover)").matches;
+
     const preBlocks = contentRef.current.querySelectorAll("pre:not(.processed)");
     preBlocks.forEach((preEl) => {
       const pre = preEl as HTMLElement;
@@ -78,7 +81,8 @@ export default function ProseContent({ html }: ProseContentProps) {
       }
 
       const copyBtn = document.createElement("button");
-      copyBtn.style.cssText = "position:absolute;top:0.5rem;right:0.5rem;padding:0.375rem;color:var(--text-muted);background:var(--surface);border:1px solid var(--border);border-radius:0.375rem;opacity:0;transition:all 0.2s ease;cursor:pointer;z-index:1;";
+      copyBtn.style.cssText = `position:absolute;top:0.5rem;right:0.5rem;padding:0.375rem;color:var(--text-muted);background:var(--surface);border:1px solid var(--border);border-radius:0.375rem;opacity:${hasHover ? 0 : 1};transition:all 0.2s ease;cursor:pointer;z-index:1;`;
+      copyBtn.setAttribute("aria-label", "复制代码");
       copyBtn.innerHTML = copyIcon;
       copyBtn.onmouseenter = () => { copyBtn.style.opacity = "1"; };
       copyBtn.onclick = async () => {
@@ -107,6 +111,7 @@ export default function ProseContent({ html }: ProseContentProps) {
       if (btn) btn.style.opacity = "1";
     };
     const wrapperMouseLeaveHandler = (e: Event) => {
+      if (!hasHover) return;
       const target = e.currentTarget as HTMLElement;
       const btn = target.querySelector("button") as HTMLElement | null;
       if (btn) btn.style.opacity = "0";

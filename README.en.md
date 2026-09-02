@@ -50,7 +50,7 @@ English · [中文](README.md)
 
 ### Requirements
 
-- Node.js ≥ 18
+- Node.js ≥ 20.9 (required by Next.js 16)
 
 ### Installation
 
@@ -72,8 +72,9 @@ Visit http://localhost:3000
 
 ```bash
 npm run build
-npm run deploy
 ```
+
+Pushing to the `main` branch triggers GitHub Actions to build and deploy to GitHub Pages automatically (see `.github/workflows/deploy.yml`).
 
 ## 📁 Project Structure
 
@@ -107,8 +108,9 @@ npm run deploy
 npm run dev          # Start dev server
 npm run build        # Build for production
 npm run lint         # Lint code
-npm run deploy       # Deploy to GitHub Pages
 ```
+
+Deployment is handled automatically by GitHub Actions on push to `main`.
 
 ## 📄 License
 

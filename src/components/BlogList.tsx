@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useMemo } from "react";
+import { Suspense } from "react";
 import PostCard from "@/components/PostCard";
 import {
   getAllPostsClient,
@@ -66,6 +66,15 @@ function BlogContent() {
   const buildHref = (key: string, value: string) =>
     `/blog/?${key}=${encodeURIComponent(value)}`;
 
+  const buildPageHref = (page: number) => {
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (category) params.set("category", category);
+    if (tag) params.set("tag", tag);
+    params.set("page", String(page));
+    return `/blog/?${params.toString()}`;
+  };
+
   const isCategoriesView = view === "categories";
   const isTagsView = view === "tags";
   const isSeriesView = view === "series";
@@ -77,8 +86,8 @@ function BlogContent() {
     currentPage * POSTS_PER_PAGE
   );
 
-  const postsByYear = useMemo(() => groupPostsByYear(paginatedPosts), [paginatedPosts]);
-  const sortedYears = useMemo(() => Object.keys(postsByYear).sort((a, b) => b.localeCompare(a)), [postsByYear]);
+  const postsByYear = groupPostsByYear(paginatedPosts);
+  const sortedYears = Object.keys(postsByYear).sort((a, b) => b.localeCompare(a));
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
@@ -229,7 +238,7 @@ function BlogContent() {
               <div className="flex items-center justify-center gap-2 mt-8">
                 {currentPage > 1 && (
                   <Link
-                    href={buildHref("page", String(currentPage - 1))}
+                    href={buildPageHref(currentPage - 1)}
                     className="px-4 py-2 text-sm text-text-secondary hover:text-text hover:bg-border/30 rounded-lg transition-all duration-200"
                   >
                     上一页
@@ -238,7 +247,7 @@ function BlogContent() {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <Link
                     key={p}
-                    href={buildHref("page", String(p))}
+                    href={buildPageHref(p)}
                     className={`w-10 h-10 flex items-center justify-center text-sm rounded-lg transition-all duration-200 ${
                       p === currentPage
                         ? "bg-accent text-white"
@@ -250,7 +259,7 @@ function BlogContent() {
                 ))}
                 {currentPage < totalPages && (
                   <Link
-                    href={buildHref("page", String(currentPage + 1))}
+                    href={buildPageHref(currentPage + 1)}
                     className="px-4 py-2 text-sm text-text-secondary hover:text-text hover:bg-border/30 rounded-lg transition-all duration-200"
                   >
                     下一页

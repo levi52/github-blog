@@ -6,6 +6,13 @@ const matter = require("gray-matter");
 const postsDirectory = path.join(__dirname, "../content/posts");
 const outputFile = path.join(__dirname, "../src/lib/posts-data.json");
 
+const postsDirResolved = path.resolve(postsDirectory);
+
+function resolvePostPath(relative) {
+  const fullPath = path.resolve(postsDirResolved, relative);
+  return fullPath.startsWith(postsDirResolved + path.sep) ? fullPath : null;
+}
+
 function generatePostsData() {
   if (!fs.existsSync(postsDirectory)) {
     fs.writeFileSync(outputFile, JSON.stringify({ posts: [], categories: [], tags: [], series: [] }));
@@ -15,9 +22,11 @@ function generatePostsData() {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPosts = fileNames
     .filter((name) => name.endsWith(".md"))
-    .map((fileName) => {
+    .flatMap((fileName) => {
+      const fullPath = resolvePostPath(fileName);
+      if (!fullPath) return [];
+
       const slug = fileName.replace(/\.md$/, "");
-      const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data } = matter(fileContents);
 

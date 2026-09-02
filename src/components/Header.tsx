@@ -118,6 +118,16 @@ export default function Header() {
               className="relative"
               onMouseEnter={() => item.dropdown && handleMouseEnter(item.label)}
               onMouseLeave={handleMouseLeave}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                  setOpenDropdown(null);
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  setOpenDropdown(null);
+                }
+              }}
             >
               {item.href ? (
                 <Link
@@ -130,7 +140,8 @@ export default function Header() {
                 <button
                   aria-expanded={openDropdown === item.label}
                   aria-haspopup="true"
-                  className="px-3 py-2 rounded-lg hover:text-text hover:bg-border/30 transition-all duration-200 flex items-center gap-1"
+                  onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
+                  className="px-3 py-2 rounded-lg hover:text-text hover:bg-border/30 transition-all duration-200 flex items-center gap-1 cursor-pointer"
                 >
                   {item.label}
                   <svg

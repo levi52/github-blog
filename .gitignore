@@ -42,3 +42,4 @@ next-env.d.ts
 
 # generated
 src/lib/posts-data.json
+.mimosa/

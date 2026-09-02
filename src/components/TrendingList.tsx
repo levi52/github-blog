@@ -171,7 +171,8 @@ export default function TrendingList() {
             href={repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group flex items-center gap-4 p-4 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300 animate-slide-in-up delay-${Math.min((i + 3) * 50, 500)}`}
+            className="group flex items-center gap-4 p-4 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300 animate-slide-in-up"
+            style={{ animationDelay: `${Math.min(i * 50, 400)}ms` }}
           >
             {/* Rank Number */}
             <div className="shrink-0 w-10 flex items-center justify-center">
