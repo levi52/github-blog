@@ -14,9 +14,10 @@ export default function Typewriter({ text, speed = 100, delay = 0, className }: 
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
+    let timer: ReturnType<typeof setInterval>;
     const timeout = setTimeout(() => {
       let i = 0;
-      const timer = setInterval(() => {
+      timer = setInterval(() => {
         if (i < text.length) {
           setDisplayedText(text.slice(0, i + 1));
           i++;
@@ -24,11 +25,12 @@ export default function Typewriter({ text, speed = 100, delay = 0, className }: 
           clearInterval(timer);
         }
       }, speed);
-
-      return () => clearInterval(timer);
     }, delay);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      if (timer) clearInterval(timer);
+    };
   }, [text, speed, delay]);
 
   useEffect(() => {

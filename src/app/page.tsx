@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import PostCard from "@/components/PostCard";
 import Typewriter from "@/components/Typewriter";
@@ -38,7 +36,10 @@ export default function Home() {
       </section>
 
       <section className="pb-20">
-        <div className="flex items-baseline justify-between mb-8 animate-slide-in-up delay-200">
+        <div
+          className="flex items-baseline justify-between mb-8 animate-slide-in-up"
+          style={{ animationDelay: "0.2s" }}
+        >
           <h2 className="font-heading text-xl tracking-tight">Recent Posts</h2>
           <Link href="/blog/" className="text-sm text-text-muted hover:text-accent transition-colors duration-200">
             View all &rarr;
@@ -47,7 +48,11 @@ export default function Home() {
         {recentPosts.length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2 md:items-stretch">
             {recentPosts.map((post, i) => (
-              <div key={post.slug} className={`animate-slide-in-up delay-${(i + 2) * 100}`}>
+              <div
+                key={post.slug}
+                className="animate-slide-in-up"
+                style={{ animationDelay: `${(i + 2) * 0.1}s` }}
+              >
                 <PostCard post={post} />
               </div>
             ))}
