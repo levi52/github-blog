@@ -38,19 +38,39 @@ export default function Home() {
           </div>
 
           <div className="hidden md:block shrink-0" aria-hidden="true">
-            <pre className="text-xs leading-relaxed text-text-muted/60 font-mono select-none">
-{`  ┌─────────────────────┐
-  │  $ npm run dev      │
-  │                     │
-  │  ✓ Ready            │
-  │  │                  │
-  │  ├─ Local:   :3000  │
-  │  ├─ Network: :8080  │
-  │  └─ Started in 12ms │
-  │                     │
-  │  ████░░░░░░░░  34%  │
-  └─────────────────────┘`}
-            </pre>
+            <svg
+              width="160"
+              height="130"
+              viewBox="0 0 160 130"
+              fill="none"
+              className="text-text-muted/40"
+            >
+              {/* Monitor body - all-in-one retro desktop */}
+              <g transform="skewY(-3)">
+                {/* Main body */}
+                <rect x="20" y="15" width="120" height="95" rx="8" fill="var(--border)" />
+                {/* Screen bezel */}
+                <rect x="28" y="22" width="104" height="72" rx="4" fill="var(--bg)" />
+                {/* Screen */}
+                <rect x="35" y="28" width="90" height="58" rx="2" fill="var(--bg-secondary)" />
+                {/* Terminal content */}
+                <text x="42" y="42" fontSize="5" fill="var(--accent)" fontFamily="monospace">$</text>
+                <text x="49" y="42" fontSize="4.5" fill="var(--text-muted)" fontFamily="monospace">npm run dev</text>
+                <rect x="42" y="47" width="3.5" height="1.5" fill="var(--accent)" opacity="0.8">
+                  <animate attributeName="opacity" values="0.8;0;0.8" dur="1.2s" repeatCount="indefinite" />
+                </rect>
+                {/* Floppy drive slot */}
+                <rect x="95" y="100" width="30" height="4" rx="1" fill="var(--bg)" opacity="0.5" />
+                {/* Power LED */}
+                <circle cx="90" cy="102" r="1.5" fill="var(--accent)" opacity="0.6">
+                  <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+                </circle>
+                {/* Apple logo */}
+                <circle cx="80" cy="102" r="2.5" fill="var(--text-muted)" opacity="0.3" />
+              </g>
+              {/* Shadow */}
+              <ellipse cx="80" cy="120" rx="55" ry="4" fill="var(--text)" opacity="0.08" />
+            </svg>
           </div>
         </div>
       </section>
