@@ -9,29 +9,49 @@ export default function Home() {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <section className="pt-20 pb-16 animate-slide-in-up">
-        <p className="text-sm text-text-muted tracking-widest uppercase mb-4">Welcome</p>
-        <h1 className="font-heading text-4xl md:text-5xl tracking-tight leading-tight mb-6">
-          Hi, I&apos;m{" "}
-          <span className="text-accent">
-            <Typewriter text="Levi5" speed={150} delay={500} />
-          </span>
-        </h1>
-        <p className="text-lg text-text-secondary max-w-xl leading-relaxed">
-          I write about programming, technology, and things I find interesting.
-        </p>
-        <div className="mt-8 flex items-center gap-4">
-          <Link
-            href="/about/"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-text text-bg text-sm font-medium rounded-full hover:brightness-110 hover:shadow-lg transition-all duration-300 ease-out"
-          >
-            About
-          </Link>
-          <Link
-            href="/blog/"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-sm font-medium rounded-full hover:border-accent hover:bg-accent/5 hover:shadow-md transition-all duration-300 ease-out"
-          >
-            View Blog
-          </Link>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
+          <div className="flex-1">
+            <p className="text-sm text-text-muted tracking-widest uppercase mb-4">Welcome</p>
+            <h1 className="font-heading text-4xl md:text-5xl tracking-tight leading-tight mb-6">
+              Hi, I&apos;m{" "}
+              <span className="text-accent">
+                <Typewriter text="Levi5" speed={150} delay={500} />
+              </span>
+            </h1>
+            <p className="text-lg text-text-secondary max-w-xl leading-relaxed">
+              I write about programming, technology, and things I find interesting.
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <Link
+                href="/about/"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-text text-bg text-sm font-medium rounded-full hover:brightness-110 hover:shadow-lg transition-all duration-300 ease-out"
+              >
+                About
+              </Link>
+              <Link
+                href="/blog/"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-sm font-medium rounded-full hover:border-accent hover:bg-accent/5 hover:shadow-md transition-all duration-300 ease-out"
+              >
+                View Blog
+              </Link>
+            </div>
+          </div>
+
+          <div className="hidden md:block shrink-0" aria-hidden="true">
+            <pre className="text-xs leading-relaxed text-text-muted/60 font-mono select-none">
+{`  ┌─────────────────────┐
+  │  $ npm run dev      │
+  │                     │
+  │  ✓ Ready            │
+  │  │                  │
+  │  ├─ Local:   :3000  │
+  │  ├─ Network: :8080  │
+  │  └─ Started in 12ms │
+  │                     │
+  │  ████░░░░░░░░  34%  │
+  └─────────────────────┘`}
+            </pre>
+          </div>
         </div>
       </section>
 
