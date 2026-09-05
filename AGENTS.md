@@ -27,6 +27,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
    - 修复：使用内联 style 的 `animationDelay` 属性，不再依赖预定义 CSS 类
    - 文件：`src/app/page.tsx:50-54`
 
+4. **移动端汉堡菜单 z-index 层级冲突** (2026-09-05)
+   - 问题：移动菜单 z-40 低于 Header z-50，导致菜单被遮挡
+   - 修复：汉堡按钮改为 `relative z-10`，移动菜单改为 `z-[60]`，并添加 ESC 键和点击外部关闭功能
+   - 文件：`src/components/Header.tsx:251,279`
+
 ### 待关注问题
 
 1. **静态 JSON 数据源**

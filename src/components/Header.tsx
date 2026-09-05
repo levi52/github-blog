@@ -39,6 +39,17 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuAnimating, setMobileMenuAnimating] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  const closeMobileMenu = useCallback(() => {
+    if (mobileMenuOpen) {
+      setMobileMenuAnimating(true);
+      timeoutRef.current = setTimeout(() => {
+        setMobileMenuOpen(false);
+        setMobileMenuAnimating(false);
+      }, 300);
+    }
+  }, [mobileMenuOpen]);
 
   const handleScroll = useCallback(() => {
     const y = window.scrollY;
@@ -74,6 +85,29 @@ export default function Header() {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeMobileMenu();
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target as Node)) {
+        closeMobileMenu();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileMenuOpen, closeMobileMenu]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -214,7 +248,7 @@ export default function Header() {
               setMobileMenuOpen(true);
             }
           }}
-          className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-border hover:border-border-hover hover:bg-surface-hover transition-colors duration-200 z-60"
+          className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-border hover:border-border-hover hover:bg-surface-hover transition-colors duration-200 relative z-[70]"
           aria-label={mobileMenuOpen ? "关闭菜单" : "打开菜单"}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-menu"
@@ -241,7 +275,8 @@ export default function Header() {
       {(mobileMenuOpen || mobileMenuAnimating) && (
         <div
           id="mobile-menu"
-          className={`md:hidden fixed inset-0 top-0 z-40 h-screen ${
+          ref={mobileMenuRef}
+          className={`md:hidden fixed inset-0 top-0 z-[60] h-screen overflow-y-auto ${
             mobileMenuAnimating ? "animate-fade-out" : "animate-fade-in"
           }`}
           style={{ backgroundColor: "var(--bg)" }}
