@@ -3,43 +3,14 @@ const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
 const { marked } = require("marked");
+const { plainTextFromHtml } = require("../src/lib/plain-text.ts");
 
 const postsDirectory = path.join(__dirname, "../content/posts");
 const outputFile = path.join(__dirname, "../src/lib/posts-data.json");
 
 const postsDirResolved = path.resolve(postsDirectory);
 
-const NAMED_ENTITIES = {
-  amp: "&",
-  lt: "<",
-  gt: ">",
-  quot: '"',
-  apos: "'",
-  nbsp: " ",
-};
-
-/**
- * Reduce Markdown to the plain-text body stored as `searchBody` and consumed by
- * the client-side full-text search. Fenced code blocks are dropped so source
- * code does not pollute results.
- *
- * Kept local (not imported from src/lib/plain-text.ts) on purpose: this script
- * is plain CommonJS run by `prebuild`, and requiring a .ts file would depend on
- * Node's type-stripping, which is unavailable on the Node 20 used in CI. The
- * two implementations must be kept in sync.
- */
-function plainTextFromHtml(html) {
-  if (!html) return "";
-  return html
-    .replace(/<pre[\s\S]*?<\/pre>/gi, " ")
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
-    .replace(/&([a-z]+);/gi, (entity, name) => NAMED_ENTITIES[name.toLowerCase()] ?? entity)
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
+/** Reduce Markdown to the plain-text body consumed by the client-side search. */
 function toSearchBody(markdown) {
   if (!markdown) return "";
   return plainTextFromHtml(marked.parse(markdown, { async: false }));

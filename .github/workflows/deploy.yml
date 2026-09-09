@@ -24,7 +24,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Single source of truth: the `engines.node` floor in package.json.
+          # ^22.18.0 is required because scripts/generate-posts.js runs during
+          # prebuild and require()s src/lib/plain-text.ts, which needs Node's
+          # built-in TypeScript type stripping (default since 22.18.0).
+          node-version-file: "package.json"
           cache: "npm"
 
       - name: Install dependencies

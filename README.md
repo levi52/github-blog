@@ -51,7 +51,7 @@
 
 ### 环境要求
 
-- Node.js ≥ 20.9（Next.js 16 要求）
+- Node.js ≥ 22.18（Next.js 16 要求 ≥ 20.9；`scripts/generate-posts.js` 直接 `require` 了 TypeScript 文件，依赖 Node 内置类型剥离，该能力自 22.18.0 起默认开启）
 
 ### 安装
 

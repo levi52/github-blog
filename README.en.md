@@ -51,7 +51,7 @@ English · [中文](README.md)
 
 ### Requirements
 
-- Node.js ≥ 20.9 (required by Next.js 16)
+- Node.js ≥ 22.18 (Next.js 16 requires ≥ 20.9; `scripts/generate-posts.js` `require`s a TypeScript file and relies on Node's built-in type stripping, enabled by default since 22.18.0)
 
 ### Installation
 
