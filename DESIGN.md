@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Levi5-Blog-design-analysis
-description: A warm-canvas editorial blog interface blending traditional Chinese aesthetics with modern minimalism. The system anchors on a tinted parchment canvas with serif display headlines, vermillion accent colors, and paper-grain texture overlay. Brand voltage comes from the Chinese traditional color naming system (朱砂、青花、靛青) — deliberately warm and culturally rich where most blogs use generic color schemes. Type voice runs a serif display ("Instrument Serif" / "Noto Serif SC") for h1/h2 and a humanist sans for body. The signature paper-grain SVG filter creates a subtle rice-paper texture across the entire viewport.
+description: A warm-canvas editorial blog interface blending traditional Chinese aesthetics with modern minimalism. The system anchors on a tinted parchment canvas with serif display headlines, vermillion accent colors, and paper-grain texture overlay. Brand voltage comes from the Chinese traditional color naming system (朱砂、青花、靛青) — deliberately warm and culturally rich where most blogs use generic color schemes. Type voice runs a serif display ("Instrument Serif" / "Noto Serif SC") for h1/h2 and a humanist sans for body. The signature paper-grain SVG filter creates a subtle rice-paper texture across the entire viewport. A second, opt-in skin ("neobrutal") re-skins the whole site as an achromatic ink-and-paper brutalist layout; it swaps the token layer only, so every component documented here keeps its structure and gains a hard-edged variant.
 
 colors:
   primary: "#b22222"
@@ -58,6 +58,11 @@ typography:
     fontWeight: 600
     lineHeight: 1.4
     letterSpacing: -0.02em
+  display-brutal:
+    fontFamily: "Archivo Black, Geist, Noto Sans SC, sans-serif"
+    fontWeight: 400
+    letterSpacing: -0.02em
+    note: "Display face for the neobrutal skin only; replaces the serif on h1-h3."
   title-lg:
     fontFamily: "Geist, system-ui, sans-serif"
     fontSize: 18px
@@ -144,6 +149,35 @@ spacing:
   xl: 32px
   xxl: 48px
   section: 96px
+
+skins:
+  # Opt-in visual skins. The default skin carries no attribute; an opt-in skin
+  # is selected by <html data-style="...">, persisted in localStorage('style')
+  # and applied before first paint by an inline script in app/layout.tsx.
+  default:
+    attribute: "(none)"
+    canvas: "{colors.canvas}"
+    accent: "user-selected theme colour (default {colors.primary})"
+    display: "{typography.display-xl}"
+    rounded: "{rounded.lg}"
+    elevation: "soft blur shadow"
+  neobrutal:
+    attribute: "neobrutal"
+    canvas: "#f6f3ea"
+    canvas-dark: "#121212"
+    surface: "#fffdf7"
+    surface-dark: "#1a1a1a"
+    ink: "#141414"
+    ink-dark: "#f6f3ea"
+    border: "#141414 (2px, vs 1px in the default skin)"
+    accent: "inherited from the active theme colour; never hardcoded"
+    accent-on-light: "white text on the six light-theme accents"
+    accent-on-dark: "ink text on the six brightened dark-theme accents"
+    display: "{typography.display-brutal}"
+    rounded: "{rounded.none} everywhere"
+    shadow: "4px 4px 0 var(--text)"
+    shadow-hover: "6px 6px 0 var(--text)"
+    palette-rule: "achromatic chrome; colour is carried only by the accent"
 
 components:
   button-primary:
@@ -405,6 +439,30 @@ The system has three surface modes:
 - Serif display headlines (Instrument Serif / Noto Serif SC) paired with humanist sans body (Geist).
 - Border radius is hierarchical: `{rounded.md}` (8px) for buttons + inputs, `{rounded.lg}` (12px) for cards, `{rounded.xl}` (16px) for feature cards, `{rounded.pill}` for tags/badges.
 
+## Skins
+
+The system ships **two skins** over one component set. Everything documented below describes the **default skin**; the second skin re-skins the same markup by swapping the token layer, so no component needs a structural fork.
+
+| | `default` | `neobrutal` |
+|---|---|---|
+| Selection | no attribute | `<html data-style="neobrutal">` |
+| Canvas | `{colors.canvas}` parchment | `#f6f3ea` paper |
+| Ink | `{colors.ink}` warm dark | `#141414` |
+| Border | 1px hairline | **2px ink** |
+| Radius | hierarchical (8/12/16px, pill) | **0 everywhere** |
+| Elevation | soft blur shadow | **hard offset `4px 4px 0`** |
+| Display face | Instrument Serif / Noto Serif SC | **Archivo Black** |
+| Accent | user-selected theme colour | user-selected theme colour (unchanged) |
+
+**The `neobrutal` skin is achromatic chrome.** Its palette carries no hue of its own — ink, paper and grey only — and the colour in the interface comes entirely from the user's `{colors.primary}` theme selection. This is deliberate: a saturated multi-colour brutalist scheme reads as noise on a technical blog, and pinning one house colour (an early draft used highlighter yellow) would have fought all six Chinese traditional themes. The result is a neutral skeleton that works with any of them.
+
+Two consequences worth knowing:
+
+- **Accent contrast flips with the mode.** The six light-theme accents are mid-to-dark saturated hues, so labels on top of them stay white. The six dark-theme accents are brightened variants, so the same labels must switch to ink. This is expressed as an `--on-accent` token rather than being hardcoded per component.
+- **Two rules cannot be tokens.** Square corners (`border-radius: 0` on every element) and the hard offset shadow are structural, not chromatic, so they live as scoped `html[data-style="neobrutal"]` rules. Everything else — surfaces, text, borders, shadows, hover states — flows through the existing custom properties.
+
+Skin state is applied by an inline script in `app/layout.tsx` **before first paint** (alongside the dark-mode and accent logic), so a returning visitor never sees a flash of the wrong skin. `localStorage('style')` persists the choice; the switcher lives on the About page.
+
 ## Colors
 
 ### Brand & Accent
@@ -601,11 +659,17 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 
 **`color-picker-option`** — Color theme selector. Padding 12px, rounded `{rounded.md}`, 1px hairline border. Contains 32px circular color swatch and label. Active state adds vermillion border.
 
+**`style-picker-option`** — Skin selector (About page, above the colour picker). Two options side by side: the parchment default and `neobrutal`. Each carries a 56×40px miniature built from the skin's own canvas/surface/ink plus a block filled with the **currently active** theme accent, so the preview tracks the user's colour choice. Active state adds an accent border and a 10% accent tint.
+
+**`skin-application`** — Skins are applied by setting `data-style` on `<html>`; the default skin carries no attribute. An inline script in `app/layout.tsx` reads `localStorage('style')` before first paint, so there is no flash of the wrong skin on return visits.
+
 ### Footer
 
 **`footer`** — Simple parchment footer. Background `{colors.canvas}`, text `{colors.muted}`, typography `{typography.body-sm}`, 1px hairline top border, padding 32px vertical. Contains copyright and GitHub link.
 
 ## Do's and Don'ts
+
+These rules govern the **default skin**. The `neobrutal` skin intentionally breaks the type and radius ones; see [Skins](#skins).
 
 ### Do
 - Anchor every page on the parchment canvas. Pure white reads as "any other blog"; the warm tint is the brand differentiator.
@@ -615,6 +679,7 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 - Support all 6 Chinese traditional color themes. Respect user preference stored in localStorage.
 - Apply `{spacing.section}` (96px) between major sections.
 - Maintain typography hierarchy: serif for display, sans for body. Never swap them.
+- Route new surfaces through the existing custom properties (`--bg`, `--surface`, `--border`, `--text`, `--shadow-*`) so every skin keeps working without extra work.
 
 ### Don't
 - Don't use cool grays or pure white for canvas. Parchment is the brand.
@@ -624,6 +689,7 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 - Don't ignore the paper-grain texture. It's a subtle but essential brand element.
 - Don't break the responsive grid. Respect breakpoints and touch targets.
 - Don't hardcode colors. Always use CSS variables (`{colors.*}`) for theming.
+- Don't hardcode a colour inside the `neobrutal` skin. Its chrome must stay achromatic and its accent must keep inheriting the user's theme choice.
 
 ## Responsive Behavior
 
@@ -643,7 +709,7 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 - Tool cards entire area is tappable.
 
 ### Collapsing Strategy
-- Top nav stays horizontal on all breakpoints (no hamburger menu).
+- Top nav collapses to a hamburger below 768px; the mobile menu is a full-screen overlay (`z-[60]`, above the header's `z-50`) and closes on Escape, outside click, or navigation.
 - Post grids reduce columns rather than scaling cards down.
 - Tool grids reduce columns: 3 → 2 → 1.
 - Article detail collapses to single column; TOC becomes floating button.
@@ -661,14 +727,15 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 1. Focus on ONE component at a time. Reference its YAML key (`{components.post-card}`, `{components.tool-card}`).
 2. Variants of an existing component (`-hover`, `-active`, `-focused`) live as separate entries in `components:`.
 3. Use `{token.refs}` everywhere — never inline hex.
-4. Display headlines stay Instrument Serif / Noto Serif SC with negative tracking. Body stays Geist 400. The split is unbreakable.
+4. Display headlines stay Instrument Serif / Noto Serif SC with negative tracking. Body stays Geist 400. The split is unbreakable — except in the `neobrutal` skin, where the display face is Archivo Black by design.
 5. Parchment + vermillion + dark warm is the trinity. Don't introduce a fourth surface tone.
 6. When in doubt about emphasis: bigger serif display before bolder weight.
-7. Always respect the 6 Chinese traditional color themes — they are core to the brand identity.
+7. Always respect the 6 Chinese traditional color themes — they are core to the brand identity, and the `neobrutal` skin inherits them rather than replacing them.
+8. Before adding a skin-specific rule, ask whether a token change would do. Only radius and the offset shadow genuinely need structural CSS.
 
 ## Known Gaps
 
-- Instrument Serif and Noto Serif SC are loaded via Google Fonts; fallback to system serif if unavailable.
+- Instrument Serif, Noto Serif SC and Archivo Black are loaded via Google Fonts; fallback to system serif/sans if unavailable.
 - Paper-grain SVG filter may have performance impact on low-end devices — could be optimized with CSS background-image alternative.
 - Color picker colors are hardcoded in component; could be extracted to shared config.
 - Stagger animation only supports up to 8 children; need dynamic delay calculation for longer lists.
@@ -676,3 +743,5 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 - View Transition API support varies across browsers; graceful degradation implemented but animation consistency varies.
 - Dark mode View Transition uses z-index 999 which may conflict with paper-grain texture (z-index 9999).
 - No explicit WCAG contrast ratio documentation — some muted text colors may not meet AA standards.
+- The `neobrutal` skin's hard offset shadow is opt-in per surface via an attribute selector; deeply nested surfaces (e.g. a card inside a card) can produce stacked shadows that look accidental.
+- The `neobrutal` skin relies on `border-radius: 0 !important` rather than per-component variants, so third-party or future components inherit square corners implicitly and may need an explicit exception.

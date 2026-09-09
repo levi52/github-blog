@@ -24,6 +24,7 @@
 - 🔍 **全文搜索**：检索标题、摘要、分类、标签与**正文**，命中片段高亮并给出上下文摘录
 - 🌙 **暗色模式**：跟随系统或手动切换
 - 🎨 **古风配色**：6 种中国传统色调可切换（朱砂、胭脂、青花、靛青、檀花、紫窑）
+- 🖥️ **界面风格**：可在古风羊皮纸与 Neo-brutalist 之间切换，与明暗模式、主题配色自由组合
 - 📑 **目录导航**：自动生成文章大纲
 - 📊 **阅读进度**：顶部进度条显示阅读位置
 - 🔤 **字体调整**：三档字号可选
@@ -100,11 +101,13 @@ npm run build
 │   │   ├── SearchBox.tsx    # 搜索框
 │   │   ├── ThemeToggle.tsx  # 主题切换
 │   │   ├── ColorPicker.tsx  # 配色切换
+│   │   ├── StylePicker.tsx  # 界面风格切换
 │   │   └── tools/           # 工具组件
 │   └── lib/                 # 工具函数
 │       ├── posts.ts         # 构建期读取 Markdown
 │       ├── posts-client.ts  # 客户端读取生成的 JSON
 │       ├── search.ts        # 全文搜索与结果排序
+│       ├── useTheme.ts      # 明暗 / 配色 / 风格状态
 │       └── post-types.ts    # 共享类型定义
 └── next-sitemap.config.js   # Sitemap 配置
 ```

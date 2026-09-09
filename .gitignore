@@ -46,4 +46,6 @@ src/lib/posts-data.json
 # so these must never be tracked or a local build dirties the work tree.
 public/sitemap*.xml
 public/robots.txt
+# local visual-verification screenshots and headless browser profiles
+.style-lab-shots/
 .mimosa/

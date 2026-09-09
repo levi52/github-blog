@@ -24,6 +24,7 @@ English · [中文](README.md)
 - 🔍 **Full-text Search**: Searches titles, summaries, categories, tags and post **bodies**, with highlighted matches and a context excerpt
 - 🌙 **Dark Mode**: System-follow or manual toggle
 - 🎨 **Chinese Ancient Theme**: 6 traditional color schemes (Cinnabar, Rouge, Indigo, Cyan, Sandalwood, Purple Kiln)
+- 🖥️ **Interface Skin**: Switch between the parchment house style and a Neo-brutalist skin, independently of dark mode and theme colour
 - 📑 **Table of Contents**: Auto-generated article outline
 - 📊 **Reading Progress**: Top progress bar shows reading position
 - 🔤 **Font Size**: Three adjustable sizes
@@ -100,11 +101,13 @@ Pushing to the `main` branch triggers GitHub Actions to build and deploy to GitH
 │   │   ├── SearchBox.tsx    # Search box
 │   │   ├── ThemeToggle.tsx  # Theme toggle
 │   │   ├── ColorPicker.tsx  # Color picker
+│   │   ├── StylePicker.tsx  # Skin switcher
 │   │   └── tools/           # Tool components
 │   └── lib/                 # Utilities
 │       ├── posts.ts         # Build-time Markdown reader
 │       ├── posts-client.ts  # Client-side generated JSON reader
 │       ├── search.ts        # Full-text search and ranking
+│       ├── useTheme.ts      # Dark mode / accent / skin state
 │       └── post-types.ts    # Shared type definitions
 └── next-sitemap.config.js   # Sitemap config
 ```
