@@ -42,4 +42,8 @@ next-env.d.ts
 
 # generated
 src/lib/posts-data.json
+# next-sitemap emits into ./out (see outDir in next-sitemap.config.js),
+# so these must never be tracked or a local build dirties the work tree.
+public/sitemap*.xml
+public/robots.txt
 .mimosa/
