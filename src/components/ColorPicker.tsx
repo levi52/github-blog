@@ -9,7 +9,8 @@ interface ColorOption {
   darkColor: string;
 }
 
-const colorOptions: ColorOption[] = [
+/** Shared with StylePicker so its preview swatch reflects the chosen accent. */
+export const colorOptions: ColorOption[] = [
   { id: "default", name: "朱砂", color: "#b22222", darkColor: "#cd5c5c" },
   { id: "zhuhong", name: "胭脂", color: "#c41d1d", darkColor: "#e74c3c" },
   { id: "qinghua", name: "青花", color: "#2e8b57", darkColor: "#3cb371" },

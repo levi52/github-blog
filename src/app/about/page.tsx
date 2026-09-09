@@ -1,6 +1,7 @@
 import Image from "next/image";
 import githubData from "@/lib/github-data.json";
 import ColorPicker from "@/components/ColorPicker";
+import StylePicker from "@/components/StylePicker";
 
 const { profile, repos } = githubData;
 
@@ -114,7 +115,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mt-16 animate-slide-in-up delay-400">
+      <section className="mt-16 space-y-6 animate-slide-in-up delay-400">
+        <h2 className="font-heading text-xl tracking-tight">外观设置</h2>
+        <StylePicker />
         <ColorPicker />
       </section>
     </div>

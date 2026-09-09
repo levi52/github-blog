@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Archivo_Black, Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,6 +22,14 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
 });
 
+// Only used by the N (Neo-brutalist) skin, which swaps the serif display face
+// for a heavy grotesque.
+const archivoBlack = Archivo_Black({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-archivo-black",
+});
+
 export const metadata: Metadata = {
   title: "Levi5's Blog",
   description: "Levi5's personal blog and tech tools",
@@ -32,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${archivoBlack.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -46,6 +54,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 var accentColor = localStorage.getItem('accent-color');
                 if (accentColor && accentColor !== 'default') {
                   document.documentElement.setAttribute('data-accent', accentColor);
+                }
+
+                // Apply the visual skin before first paint to avoid a flash of
+                // the default parchment style. 'default' carries no attribute.
+                var style = localStorage.getItem('style');
+                if (style === 'neobrutal') {
+                  document.documentElement.setAttribute('data-style', style);
                 }
               })();
             `,

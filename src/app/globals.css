@@ -112,6 +112,143 @@ html[data-accent="ziyao"].dark {
   --font-heading: var(--font-instrument-serif), "Noto Serif SC", serif;
 }
 
+/* ==========================================================================
+   N — Neo-brutalist skin (opt-in via <html data-style="neobrutal">)
+
+   Token-first by design: the site already routes every card, button and input
+   through --bg/--surface/--border/--text/--shadow-*, so most of the look is a
+   palette swap. Only two things genuinely cannot be expressed as tokens —
+   square corners and the hard offset shadow — and those are handled below.
+
+   The palette is deliberately achromatic: ink, paper and grey. The accent is
+   NOT hardcoded — it inherits whatever theme colour the user picked in
+   「主题配色」, so N works as a neutral skeleton for all six of them.
+   ========================================================================== */
+
+html[data-style="neobrutal"] {
+  --bg: #f6f3ea;
+  --bg-secondary: #eae5d6;
+  --surface: #fffdf7;
+  --surface-hover: #f0ebdd;
+  --text: #141414;
+  --text-secondary: #3a3733;
+  --text-muted: #6f6a62;
+  --border: #141414;
+  --border-hover: #141414;
+  /* Hard offset instead of a soft blur — the signature brutalist move. */
+  --shadow: 4px 4px 0 var(--text);
+  --shadow-hover: 6px 6px 0 var(--text);
+  --shadow-accent: 4px 4px 0 var(--text);
+  /* Light theme accents (朱砂/胭脂/青花/靛青/檀花/紫窑) are all mid-to-dark
+     saturated hues, so white stays legible on top of them. */
+  --on-accent: #ffffff;
+  --color-white: var(--on-accent);
+}
+
+/* Re-assert the chosen accent so it wins over the --accent declared above.
+   The plain [data-accent] rules earlier in this file have lower specificity
+   than html[data-style="neobrutal"], so without these the accent would be
+   ignored whenever a non-default colour is selected. */
+html[data-style="neobrutal"][data-accent="zhuhong"] {
+  --accent: #c41d1d;
+  --accent-hover: #a01616;
+}
+html[data-style="neobrutal"][data-accent="qinghua"] {
+  --accent: #2e8b57;
+  --accent-hover: #228b22;
+}
+html[data-style="neobrutal"][data-accent="dianqing"] {
+  --accent: #4a6fa5;
+  --accent-hover: #3a5f95;
+}
+html[data-style="neobrutal"][data-accent="tanhua"] {
+  --accent: #cd853f;
+  --accent-hover: #b8732e;
+}
+html[data-style="neobrutal"][data-accent="ziyao"] {
+  --accent: #7b68ee;
+  --accent-hover: #6a5acd;
+}
+
+html[data-style="neobrutal"].dark {
+  --bg: #121212;
+  --bg-secondary: #1e1e1e;
+  --surface: #1a1a1a;
+  --surface-hover: #242424;
+  --text: #f6f3ea;
+  --text-secondary: #cfc9bd;
+  --text-muted: #948d81;
+  --border: #f6f3ea;
+  --border-hover: #f6f3ea;
+  --shadow: 4px 4px 0 var(--text);
+  --shadow-hover: 6px 6px 0 var(--text);
+  --shadow-accent: 4px 4px 0 var(--text);
+  /* Dark-theme accents are the brightened variants, so labels on top of them
+     need ink rather than white. */
+  --on-accent: #141414;
+}
+
+html[data-style="neobrutal"].dark[data-accent="zhuhong"] {
+  --accent: #e74c3c;
+  --accent-hover: #f25c5c;
+}
+html[data-style="neobrutal"].dark[data-accent="qinghua"] {
+  --accent: #3cb371;
+  --accent-hover: #4eca8c;
+}
+html[data-style="neobrutal"].dark[data-accent="dianqing"] {
+  --accent: #6495ed;
+  --accent-hover: #7aabff;
+}
+html[data-style="neobrutal"].dark[data-accent="tanhua"] {
+  --accent: #daa06d;
+  --accent-hover: #e8b080;
+}
+html[data-style="neobrutal"].dark[data-accent="ziyao"] {
+  --accent: #9370db;
+  --accent-hover: #a88de8;
+}
+
+/* Square corners everywhere. One rule beats editing 160+ utilities, and it
+   keeps future components on-style without extra work. */
+html[data-style="neobrutal"] *,
+html[data-style="neobrutal"] *::before,
+html[data-style="neobrutal"] *::after {
+  border-radius: 0 !important;
+}
+
+/* Cards at rest get the offset shadow; the palette swap alone would leave
+   them flat until hover. Scoped to surface-backed containers so inputs and
+   full-bleed sections stay clean. */
+html[data-style="neobrutal"] [class*="bg-surface"]:not([class*="bg-surface/"]),
+html[data-style="neobrutal"] [class*="bg-bg-secondary"]:not([class*="bg-bg-secondary/"]) {
+  box-shadow: var(--shadow);
+}
+
+/* Opt out of the offset shadow where it would collide with neighbouring
+   elements or read as a mistake (swatches, small icon chips). */
+html[data-style="neobrutal"] [class*="w-8 h-8"],
+html[data-style="neobrutal"] [class*="w-10 h-10"] {
+  box-shadow: none;
+}
+
+/* Thin 1px hairlines read as fragile in this language; give real weight. */
+html[data-style="neobrutal"] .border,
+html[data-style="neobrutal"] [class*="border-border"] {
+  border-width: 2px;
+}
+
+/* Display face swap: the serif is the parchment skin's voice, but it fights
+   the flat, heavy geometry of this one. Archivo Black carries the weight. */
+html[data-style="neobrutal"] .font-heading,
+html[data-style="neobrutal"] h1,
+html[data-style="neobrutal"] h2,
+html[data-style="neobrutal"] h3 {
+  font-family: var(--font-archivo-black), var(--font-geist-sans), "Noto Sans SC",
+    "Microsoft YaHei", sans-serif;
+  letter-spacing: -0.02em;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
