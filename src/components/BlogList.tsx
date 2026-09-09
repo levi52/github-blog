@@ -11,7 +11,7 @@ import {
   getTagCountsClient,
   getPostsByCategoryClient,
   getPostsByTagClient,
-  searchPostsClient,
+  searchPostsWithResultsClient,
   getAllSeriesClient,
 } from "@/lib/posts-client";
 import type { PostData } from "@/lib/posts";
@@ -39,10 +39,17 @@ function BlogContent() {
   const page = parseInt(searchParams.get("page") || "1", 10);
 
   let posts;
+  let snippets = new Map<string, string>();
   let filterLabel = "";
 
   if (q) {
-    posts = searchPostsClient(q);
+    const results = searchPostsWithResultsClient(q);
+    posts = results.map((result) => result.post);
+    snippets = new Map(
+      results.flatMap((result) =>
+        result.snippet ? [[result.post.slug, result.snippet] as const] : []
+      )
+    );
     filterLabel = `"${q}"`;
   } else if (category) {
     posts = getPostsByCategoryClient(category);
@@ -222,7 +229,11 @@ function BlogContent() {
                   <div className="space-y-4">
                     {postsByYear[year].map((post, i) => (
                       <div key={post.slug} className={`animate-slide-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
-                        <PostCard post={post} query={q || ""} />
+                        <PostCard
+                          post={post}
+                          query={q || ""}
+                          snippet={snippets.get(post.slug)}
+                        />
                       </div>
                     ))}
                   </div>

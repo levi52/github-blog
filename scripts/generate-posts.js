@@ -2,11 +2,48 @@
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
+const { marked } = require("marked");
 
 const postsDirectory = path.join(__dirname, "../content/posts");
 const outputFile = path.join(__dirname, "../src/lib/posts-data.json");
 
 const postsDirResolved = path.resolve(postsDirectory);
+
+const NAMED_ENTITIES = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+};
+
+/**
+ * Reduce Markdown to the plain-text body stored as `searchBody` and consumed by
+ * the client-side full-text search. Fenced code blocks are dropped so source
+ * code does not pollute results.
+ *
+ * Kept local (not imported from src/lib/plain-text.ts) on purpose: this script
+ * is plain CommonJS run by `prebuild`, and requiring a .ts file would depend on
+ * Node's type-stripping, which is unavailable on the Node 20 used in CI. The
+ * two implementations must be kept in sync.
+ */
+function plainTextFromHtml(html) {
+  if (!html) return "";
+  return html
+    .replace(/<pre[\s\S]*?<\/pre>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
+    .replace(/&([a-z]+);/gi, (entity, name) => NAMED_ENTITIES[name.toLowerCase()] ?? entity)
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function toSearchBody(markdown) {
+  if (!markdown) return "";
+  return plainTextFromHtml(marked.parse(markdown, { async: false }));
+}
 
 function resolvePostPath(relative) {
   const fullPath = path.resolve(postsDirResolved, relative);
@@ -28,13 +65,14 @@ function generatePostsData() {
 
       const slug = fileName.replace(/\.md$/, "");
       const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data } = matter(fileContents);
+      const { data, content } = matter(fileContents);
 
       return {
         slug,
         title: data.title || "",
         date: data.date || "",
         summary: data.summary || "",
+        searchBody: toSearchBody(content),
         categories: data.categories || [],
         tags: data.tags || [],
         coverImage: data.coverImage || undefined,
@@ -56,6 +94,9 @@ function generatePostsData() {
   const categories = [...new Set(posts.flatMap((p) => p.categories))].sort();
   const tags = [...new Set(posts.flatMap((p) => p.tags))].sort();
 
+  // Series entries are a lightweight index, not a second copy of the posts.
+  // The series view only needs the name, the count, and slug + title per entry,
+  // so duplicating searchBody/frontmatter here would bloat the payload twice over.
   const seriesMap = new Map();
   posts.forEach((post) => {
     if (post.series) {
@@ -69,7 +110,14 @@ function generatePostsData() {
   seriesMap.forEach((seriesPosts, name) => {
     series.push({
       name,
-      posts: seriesPosts.sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0)),
+      posts: seriesPosts
+        .slice()
+        .sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0))
+        .map((post) => ({
+          slug: post.slug,
+          title: post.title,
+          seriesOrder: post.seriesOrder,
+        })),
     });
   });
 

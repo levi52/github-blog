@@ -3,7 +3,20 @@ import Image from "next/image";
 import type { PostData } from "@/lib/posts";
 import HighlightText from "@/components/HighlightText";
 
-export default function PostCard({ post, query }: { post: PostData; query?: string }) {
+interface PostCardProps {
+  post: PostData;
+  /** Active search query, used to highlight matches. */
+  query?: string;
+  /**
+   * Excerpt around a body match. Shown in place of the summary when the query
+   * only matched the post body, so the reason for the hit is visible.
+   */
+  snippet?: string;
+}
+
+export default function PostCard({ post, query, snippet }: PostCardProps) {
+  const preview = snippet || post.summary;
+
   return (
     <article className="group h-full p-4 bg-surface border border-border rounded-xl hover:border-border-hover hover:shadow-[var(--shadow-hover)] transition-all duration-300">
       <div className="flex gap-4">
@@ -36,8 +49,12 @@ export default function PostCard({ post, query }: { post: PostData; query?: stri
               <HighlightText text={post.title} query={query || ""} />
             </h2>
           </Link>
-          <p className="text-sm text-text-secondary leading-relaxed mb-3 line-clamp-2">
-            <HighlightText text={post.summary} query={query || ""} />
+          <p
+            className={`text-sm text-text-secondary leading-relaxed mb-3 line-clamp-2 ${
+              snippet ? "italic" : ""
+            }`}
+          >
+            <HighlightText text={preview} query={query || ""} />
           </p>
           <div className="flex flex-wrap gap-1.5">
             {post.tags.slice(0, 4).map((tag) => (

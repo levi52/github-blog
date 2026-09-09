@@ -1,26 +1,14 @@
 import postsData from "./posts-data.json";
+import type { PostData, SeriesData } from "./post-types";
+import { searchPostsWithResults, type PostSearchResult } from "./search";
 
-export interface PostData {
-  slug: string;
-  title: string;
-  date: string;
-  summary: string;
-  categories: string[];
-  tags: string[];
-  coverImage?: string;
-  pinned?: boolean;
-  draft?: boolean;
-  series?: string;
-  seriesOrder?: number;
-}
+export type { PostData, SeriesData, SeriesPost } from "./post-types";
 
-export interface SeriesData {
-  name: string;
-  posts: PostData[];
-}
+const posts = postsData.posts as PostData[];
+const series = (postsData as { series?: SeriesData[] }).series || [];
 
 export function getAllPostsClient(): PostData[] {
-  return postsData.posts as PostData[];
+  return posts;
 }
 
 export function getAllCategoriesClient(): string[] {
@@ -33,7 +21,7 @@ export function getAllTagsClient(): string[] {
 
 export function getTagCountsClient(): Record<string, number> {
   const tagCounts: Record<string, number> = {};
-  (postsData.posts as PostData[]).forEach((post) => {
+  posts.forEach((post) => {
     post.tags.forEach((tag) => {
       tagCounts[tag] = (tagCounts[tag] || 0) + 1;
     });
@@ -42,35 +30,32 @@ export function getTagCountsClient(): Record<string, number> {
 }
 
 export function getPostsByCategoryClient(category: string): PostData[] {
-  return (postsData.posts as PostData[]).filter((post) => post.categories.includes(category));
+  return posts.filter((post) => post.categories.includes(category));
 }
 
 export function getPostsByTagClient(tag: string): PostData[] {
-  return (postsData.posts as PostData[]).filter((post) => post.tags.includes(tag));
+  return posts.filter((post) => post.tags.includes(tag));
+}
+
+/** Full-text search over titles, tags, categories, summaries and bodies. */
+export function searchPostsWithResultsClient(query: string): PostSearchResult[] {
+  return searchPostsWithResults(posts, query);
 }
 
 export function searchPostsClient(query: string): PostData[] {
-  const lowerQuery = query.toLowerCase();
-  return (postsData.posts as PostData[]).filter(
-    (post) =>
-      post.title.toLowerCase().includes(lowerQuery) ||
-      post.summary.toLowerCase().includes(lowerQuery) ||
-      post.tags.some((t) => t.toLowerCase().includes(lowerQuery)) ||
-      post.categories.some((c) => c.toLowerCase().includes(lowerQuery))
-  );
+  return searchPostsWithResultsClient(query).map((result) => result.post);
 }
 
 export function getAllSeriesClient(): SeriesData[] {
-  return (postsData as { series?: SeriesData[] }).series || [];
+  return series;
 }
 
 export function getSeriesByNameClient(name: string): SeriesData | null {
-  const allSeries = getAllSeriesClient();
-  return allSeries.find((s) => s.name === name) || null;
+  return series.find((s) => s.name === name) || null;
 }
 
-export function getPostsBySeriesClient(series: string): PostData[] {
-  return (postsData.posts as PostData[])
-    .filter((post) => post.series === series)
+export function getPostsBySeriesClient(seriesName: string): PostData[] {
+  return posts
+    .filter((post) => post.series === seriesName)
     .sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0));
 }

@@ -3,6 +3,11 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import type { PostData, SeriesData, SeriesPost } from "./post-types";
+import { plainTextFromHtml } from "./plain-text";
+import { searchPostsWithResults } from "./search";
+
+export type { PostData, SeriesData, SeriesPost } from "./post-types";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -12,27 +17,8 @@ function resolvePostPath(relative: string): string | null {
   return fullPath.startsWith(base + path.sep) ? fullPath : null;
 }
 
-export interface PostData {
-  slug: string;
-  title: string;
-  date: string;
-  summary: string;
-  categories: string[];
-  tags: string[];
-  coverImage?: string;
-  pinned?: boolean;
-  draft?: boolean;
-  series?: string;
-  seriesOrder?: number;
-}
-
 export interface PostContent extends PostData {
   contentHtml: string;
-}
-
-export interface SeriesData {
-  name: string;
-  posts: PostData[];
 }
 
 function getAllPostsRaw(): PostData[] {
@@ -102,6 +88,7 @@ export function getPostBySlug(slug: string): PostContent | null {
     title: data.title || "",
     date,
     summary: data.summary || "",
+    searchBody: plainTextFromHtml(contentHtml),
     categories: data.categories || [],
     tags: data.tags || [],
     coverImage: data.coverImage || undefined,
@@ -136,14 +123,7 @@ export function getPostsByTag(tag: string): PostData[] {
 }
 
 export function searchPosts(query: string): PostData[] {
-  const lowerQuery = query.toLowerCase();
-  return getAllPosts().filter(
-    (post) =>
-      post.title.toLowerCase().includes(lowerQuery) ||
-      post.summary.toLowerCase().includes(lowerQuery) ||
-      post.tags.some((t) => t.toLowerCase().includes(lowerQuery)) ||
-      post.categories.some((c) => c.toLowerCase().includes(lowerQuery))
-  );
+  return searchPostsWithResults(getAllPosts(), query).map((result) => result.post);
 }
 
 export function getAdjacentPosts(slug: string): { prev: PostData | null; next: PostData | null } {
@@ -168,10 +148,17 @@ export function getAllSeries(): SeriesData[] {
   });
 
   const series: SeriesData[] = [];
-  seriesMap.forEach((posts, name) => {
+  seriesMap.forEach((seriesPosts, name) => {
     series.push({
       name,
-      posts: posts.sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0)),
+      posts: seriesPosts
+        .slice()
+        .sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0))
+        .map((post) => ({
+          slug: post.slug,
+          title: post.title,
+          seriesOrder: post.seriesOrder,
+        })),
     });
   });
 
@@ -187,4 +174,12 @@ export function getPostsBySeries(series: string): PostData[] {
   return getAllPosts()
     .filter((post) => post.series === series)
     .sort((a, b) => (a.seriesOrder || 0) - (b.seriesOrder || 0));
+}
+
+export function getSeriesEntries(series: string): SeriesPost[] {
+  return getPostsBySeries(series).map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    seriesOrder: post.seriesOrder,
+  }));
 }
