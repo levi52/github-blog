@@ -21,7 +21,7 @@ English · [中文](README.md)
 ### 📖 Blog
 - 📝 **Post Management**: Markdown format with frontmatter metadata
 - 🏷️ **Categories & Tags**: Flexible content organization
-- 🔍 **Full-text Search**: Quick article lookup with highlighting
+- 🔍 **Full-text Search**: Searches titles, summaries, categories, tags and post **bodies**, with highlighted matches and a context excerpt
 - 🌙 **Dark Mode**: System-follow or manual toggle
 - 🎨 **Chinese Ancient Theme**: 6 traditional color schemes (Cinnabar, Rouge, Indigo, Cyan, Sandalwood, Purple Kiln)
 - 📑 **Table of Contents**: Auto-generated article outline
@@ -45,6 +45,7 @@ English · [中文](README.md)
 | Text Diff | Text difference comparison |
 | Regex Tester | Regular expression testing |
 | XMind to Markdown | Convert mind maps to Markdown |
+| Avatar Generator | GitHub-style pixel identicon generator |
 
 ## 🚀 Quick Start
 
@@ -82,12 +83,15 @@ Pushing to the `main` branch triggers GitHub Actions to build and deploy to GitH
 ├── content/posts/           # Blog posts (Markdown)
 ├── public/                  # Static assets
 ├── scripts/                 # Build scripts
-│   └── generate-posts.js    # Post data generation
+│   ├── generate-posts.js    # Post data generation (incl. search body text)
+│   ├── fetch-github.js      # Fetch GitHub profile and repos
+│   └── fetch-trending.js    # Fetch weekly GitHub Trending
 ├── src/
 │   ├── app/                 # Page routes
 │   │   ├── page.tsx         # Home
 │   │   ├── blog/            # Blog pages
 │   │   ├── tools/           # Tools pages
+│   │   ├── trending/        # GitHub Trending page
 │   │   └── about/           # About page
 │   ├── components/          # React components
 │   │   ├── Header.tsx       # Navigation
@@ -98,9 +102,16 @@ Pushing to the `main` branch triggers GitHub Actions to build and deploy to GitH
 │   │   ├── ColorPicker.tsx  # Color picker
 │   │   └── tools/           # Tool components
 │   └── lib/                 # Utilities
-│       └── posts.ts         # Post data processing
+│       ├── posts.ts         # Build-time Markdown reader
+│       ├── posts-client.ts  # Client-side generated JSON reader
+│       ├── search.ts        # Full-text search and ranking
+│       └── post-types.ts    # Shared type definitions
 └── next-sitemap.config.js   # Sitemap config
 ```
+
+> `src/lib/posts-data.json` plus `sitemap*.xml` / `robots.txt` under `out/` are build
+> artifacts and are not tracked; run `npm run build` (or `node scripts/generate-posts.js`)
+> after adding a post to regenerate them.
 
 ## 🛠️ Commands
 

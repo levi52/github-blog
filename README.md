@@ -21,7 +21,7 @@
 ### 📖 博客
 - 📝 **文章管理**：Markdown 格式，支持 frontmatter 元数据
 - 🏷️ **分类与标签**：灵活的内容组织方式
-- 🔍 **全文搜索**：快速定位文章，搜索结果高亮
+- 🔍 **全文搜索**：检索标题、摘要、分类、标签与**正文**，命中片段高亮并给出上下文摘录
 - 🌙 **暗色模式**：跟随系统或手动切换
 - 🎨 **古风配色**：6 种中国传统色调可切换（朱砂、胭脂、青花、靛青、檀花、紫窑）
 - 📑 **目录导航**：自动生成文章大纲
@@ -45,6 +45,7 @@
 | 文本对比 | 文本差异对比 |
 | 正则测试 | 正则表达式测试 |
 | XMind 转 Markdown | 思维导图转换为 Markdown |
+| 头像生成器 | GitHub 风格像素头像生成 |
 
 ## 🚀 快速开始
 
@@ -82,12 +83,15 @@ npm run build
 ├── content/posts/           # 博客文章（Markdown）
 ├── public/                  # 静态资源
 ├── scripts/                 # 构建脚本
-│   └── generate-posts.js    # 文章数据生成
+│   ├── generate-posts.js    # 文章数据生成（含全文搜索用正文）
+│   ├── fetch-github.js      # 抓取 GitHub 用户与仓库数据
+│   └── fetch-trending.js    # 抓取 GitHub 每周 Trending
 ├── src/
 │   ├── app/                 # 页面路由
 │   │   ├── page.tsx         # 首页
 │   │   ├── blog/            # 博客页面
 │   │   ├── tools/           # 工具页面
+│   │   ├── trending/        # GitHub Trending 页面
 │   │   └── about/           # 关于页面
 │   ├── components/          # React 组件
 │   │   ├── Header.tsx       # 导航栏
@@ -98,9 +102,15 @@ npm run build
 │   │   ├── ColorPicker.tsx  # 配色切换
 │   │   └── tools/           # 工具组件
 │   └── lib/                 # 工具函数
-│       └── posts.ts         # 文章数据处理
+│       ├── posts.ts         # 构建期读取 Markdown
+│       ├── posts-client.ts  # 客户端读取生成的 JSON
+│       ├── search.ts        # 全文搜索与结果排序
+│       └── post-types.ts    # 共享类型定义
 └── next-sitemap.config.js   # Sitemap 配置
 ```
+
+> `src/lib/posts-data.json` 与 `out/` 下的 `sitemap*.xml`、`robots.txt` 均为构建产物，不入版本库；
+> 新增文章后运行 `npm run build`（或 `node scripts/generate-posts.js`）即可重新生成。
 
 ## 🛠️ 开发命令
 
