@@ -1,6 +1,234 @@
 {
   "weeks": [
     {
+      "weekId": "2026-W39",
+      "startDate": "2026-09-21",
+      "endDate": "2026-09-27",
+      "fetchedAt": "2026-09-25T03:12:24.849Z",
+      "repos": [
+        {
+          "owner": "anthropics",
+          "repo": "financial-services",
+          "url": "https://github.com/anthropics/financial-services",
+          "description": "",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 37382,
+          "forks": 5421,
+          "todayStars": 2382
+        },
+        {
+          "owner": "alibaba",
+          "repo": "open-code-review",
+          "url": "https://github.com/alibaba/open-code-review",
+          "description": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+          "language": "Go",
+          "langColor": "#00ADD8",
+          "stars": 40859,
+          "forks": 2936,
+          "todayStars": 6920
+        },
+        {
+          "owner": "anthropics",
+          "repo": "claude-code",
+          "url": "https://github.com/anthropics/claude-code",
+          "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 147984,
+          "forks": 24422,
+          "todayStars": 2384
+        },
+        {
+          "owner": "affaan-m",
+          "repo": "ECC",
+          "url": "https://github.com/affaan-m/ECC",
+          "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 266977,
+          "forks": 39897,
+          "todayStars": 6193
+        },
+        {
+          "owner": "Tencent",
+          "repo": "WeKnora",
+          "url": "https://github.com/Tencent/WeKnora",
+          "description": "Open-source LLM knowledge platform: turn raw documents into a queryable RAG, an autonomous reasoning agent, and a self-maintaining Wiki.",
+          "language": "Go",
+          "langColor": "#00ADD8",
+          "stars": 29757,
+          "forks": 4001,
+          "todayStars": 3749
+        },
+        {
+          "owner": "addyosmani",
+          "repo": "agent-skills",
+          "url": "https://github.com/addyosmani/agent-skills",
+          "description": "Production-grade engineering skills for AI coding agents.",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 98910,
+          "forks": 10388,
+          "todayStars": 3345
+        },
+        {
+          "owner": "anthropics",
+          "repo": "knowledge-work-plugins",
+          "url": "https://github.com/anthropics/knowledge-work-plugins",
+          "description": "Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 25563,
+          "forks": 3026,
+          "todayStars": 1118
+        },
+        {
+          "owner": "stablyai",
+          "repo": "orca",
+          "url": "https://github.com/stablyai/orca",
+          "description": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 77609,
+          "forks": 5080,
+          "todayStars": 6547
+        },
+        {
+          "owner": "TencentCloud",
+          "repo": "Octop",
+          "url": "https://github.com/TencentCloud/Octop",
+          "description": "A smarter, self-hosted AI assistant — multi-user, multi-agent.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 4877,
+          "forks": 579,
+          "todayStars": 1608
+        },
+        {
+          "owner": "davila7",
+          "repo": "claude-code-templates",
+          "url": "https://github.com/davila7/claude-code-templates",
+          "description": "CLI tool for configuring and monitoring Claude Code",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 31733,
+          "forks": 3605,
+          "todayStars": 965
+        },
+        {
+          "owner": "JustVugg",
+          "repo": "colibri",
+          "url": "https://github.com/JustVugg/colibri",
+          "description": "Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦",
+          "language": "C",
+          "langColor": "#555555",
+          "stars": 37557,
+          "forks": 4066,
+          "todayStars": 2055
+        },
+        {
+          "owner": "vectorize-io",
+          "repo": "hindsight",
+          "url": "https://github.com/vectorize-io/hindsight",
+          "description": "Hindsight: Agent Memory That Learns",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 27885,
+          "forks": 2696,
+          "todayStars": 3363
+        },
+        {
+          "owner": "cloudflare",
+          "repo": "quiche",
+          "url": "https://github.com/cloudflare/quiche",
+          "description": "🥧 Savoury implementation of the QUIC transport protocol and HTTP/3",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 12579,
+          "forks": 1148,
+          "todayStars": 741
+        },
+        {
+          "owner": "Fission-AI",
+          "repo": "OpenSpec",
+          "url": "https://github.com/Fission-AI/OpenSpec",
+          "description": "Spec-driven development (SDD) for AI coding assistants.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 70243,
+          "forks": 4803,
+          "todayStars": 1415
+        },
+        {
+          "owner": "akitaonrails",
+          "repo": "ai-memory",
+          "url": "https://github.com/akitaonrails/ai-memory",
+          "description": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 8353,
+          "forks": 567,
+          "todayStars": 1243
+        },
+        {
+          "owner": "pytorch",
+          "repo": "pytorch",
+          "url": "https://github.com/pytorch/pytorch",
+          "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 103266,
+          "forks": 30290,
+          "todayStars": 228
+        },
+        {
+          "owner": "cline",
+          "repo": "cline",
+          "url": "https://github.com/cline/cline",
+          "description": "Autonomous coding agent as an SDK, IDE extension, or CLI assistant.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 69256,
+          "forks": 7515,
+          "todayStars": 855
+        },
+        {
+          "owner": "LibreChat-AI",
+          "repo": "LibreChat",
+          "url": "https://github.com/LibreChat-AI/LibreChat",
+          "description": "Enhanced ChatGPT Clone: Features Agents, MCP, Skills, DeepSeek, Anthropic, AWS, OpenAI, Responses API, Azure, Groq, o1, GPT-5, Mistral, OpenRouter, Vertex AI, Gemini, Artifacts, AI model switching, message search, Code Interpreter, langchain, DALL-E-3, OpenAPI Actions, Functions, Secure Multi-User Auth, Presets, open-source for self-hosting. Active",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 44904,
+          "forks": 9202,
+          "todayStars": 743
+        },
+        {
+          "owner": "superdesigndev",
+          "repo": "treg",
+          "url": "https://github.com/superdesigndev/treg",
+          "description": "OpenRouter for agent tools. Join community here: https://discord.gg/6mQYYfFMAn",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 3186,
+          "forks": 265,
+          "todayStars": 1406
+        },
+        {
+          "owner": "cilium",
+          "repo": "cilium",
+          "url": "https://github.com/cilium/cilium",
+          "description": "eBPF-based Networking, Security, and Observability",
+          "language": "Go",
+          "langColor": "#00ADD8",
+          "stars": 25537,
+          "forks": 4104,
+          "todayStars": 362
+        }
+      ]
+    },
+    {
       "weekId": "2026-W38",
       "startDate": "2026-09-14",
       "endDate": "2026-09-20",
