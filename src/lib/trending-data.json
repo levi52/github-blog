@@ -1,6 +1,135 @@
 {
   "weeks": [
     {
+      "weekId": "2026-W41",
+      "startDate": "2026-10-05",
+      "endDate": "2026-10-11",
+      "fetchedAt": "2026-10-09T04:20:40.296Z",
+      "repos": [
+        {
+          "owner": "boykopovar",
+          "repo": "AnyPS5",
+          "url": "https://github.com/boykopovar/AnyPS5",
+          "description": "Tool for automatic PS5 executables porting to Linux and Windows",
+          "language": "C++",
+          "langColor": "#f34b7d",
+          "stars": 16453,
+          "forks": 1307,
+          "todayStars": 10243
+        },
+        {
+          "owner": "mvschwarz",
+          "repo": "openrig",
+          "url": "https://github.com/mvschwarz/openrig",
+          "description": "Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 6205,
+          "forks": 451,
+          "todayStars": 2693
+        },
+        {
+          "owner": "heygen-com",
+          "repo": "hyperframes",
+          "url": "https://github.com/heygen-com/hyperframes",
+          "description": "Write HTML. Render video. Built for agents.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 59301,
+          "forks": 5284,
+          "todayStars": 3996
+        },
+        {
+          "owner": "EpicGames",
+          "repo": "raddebugger",
+          "url": "https://github.com/EpicGames/raddebugger",
+          "description": "A native, user-mode, multi-process, graphical debugger.",
+          "language": "C",
+          "langColor": "#555555",
+          "stars": 8158,
+          "forks": 391,
+          "todayStars": 448
+        },
+        {
+          "owner": "cursor",
+          "repo": "plugins",
+          "url": "https://github.com/cursor/plugins",
+          "description": "Cursor plugin specification and official plugins",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 10423,
+          "forks": 986,
+          "todayStars": 1109
+        },
+        {
+          "owner": "thedotmack",
+          "repo": "claude-mem",
+          "url": "https://github.com/thedotmack/claude-mem",
+          "description": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 98623,
+          "forks": 8646,
+          "todayStars": 3153
+        },
+        {
+          "owner": "mattpocock",
+          "repo": "skills",
+          "url": "https://github.com/mattpocock/skills",
+          "description": "Skills for Real Engineers. Straight from my .agents directory.",
+          "language": "Shell",
+          "langColor": "#89e051",
+          "stars": 281330,
+          "forks": 23577,
+          "todayStars": 7448
+        },
+        {
+          "owner": "Panniantong",
+          "repo": "Agent-Reach",
+          "url": "https://github.com/Panniantong/Agent-Reach",
+          "description": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 94275,
+          "forks": 8243,
+          "todayStars": 6987
+        },
+        {
+          "owner": "earthtojake",
+          "repo": "text-to-cad",
+          "url": "https://github.com/earthtojake/text-to-cad",
+          "description": "Give your agent CAD superpowers.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 18519,
+          "forks": 1836,
+          "todayStars": 1898
+        },
+        {
+          "owner": "DuarteSantos8",
+          "repo": "openGym",
+          "url": "https://github.com/DuarteSantos8/openGym",
+          "description": "Self-hosted gym & body-weight tracker — plan routines, log workouts (supersets, warm-ups, cardio), see which muscles are trained, fatigued or detrained, import from FitNotes/Strong/Hevy, passkey login. Your data, your server.",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 8111,
+          "forks": 1032,
+          "todayStars": 6086
+        },
+        {
+          "owner": "pablostanley",
+          "repo": "yoinks",
+          "url": "https://github.com/pablostanley/yoinks",
+          "description": "yoink any video from your terminal. no shady ads.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 5453,
+          "forks": 461,
+          "todayStars": 2706
+        }
+      ]
+    },
+    {
       "weekId": "2026-W40",
       "startDate": "2026-09-28",
       "endDate": "2026-10-04",
