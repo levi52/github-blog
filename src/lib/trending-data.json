@@ -1,6 +1,135 @@
 {
   "weeks": [
     {
+      "weekId": "2026-W42",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-18",
+      "fetchedAt": "2026-10-16T02:56:06.685Z",
+      "repos": [
+        {
+          "owner": "morluto",
+          "repo": "rea",
+          "url": "https://github.com/morluto/rea",
+          "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 273254,
+          "forks": 68743,
+          "todayStars": 239477
+        },
+        {
+          "owner": "boykopovar",
+          "repo": "AnyPS5",
+          "url": "https://github.com/boykopovar/AnyPS5",
+          "description": "Tool for automatic PS5 executables porting to Linux and Windows",
+          "language": "C++",
+          "langColor": "#f34b7d",
+          "stars": 38807,
+          "forks": 3461,
+          "todayStars": 25174
+        },
+        {
+          "owner": "mattpocock",
+          "repo": "skills",
+          "url": "https://github.com/mattpocock/skills",
+          "description": "Skills for Real Engineers. Straight from my .agents directory.",
+          "language": "Shell",
+          "langColor": "#89e051",
+          "stars": 292994,
+          "forks": 24563,
+          "todayStars": 12147
+        },
+        {
+          "owner": "heygen-com",
+          "repo": "hyperframes",
+          "url": "https://github.com/heygen-com/hyperframes",
+          "description": "Write HTML. Render video. Built for agents.",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 64637,
+          "forks": 5810,
+          "todayStars": 5318
+        },
+        {
+          "owner": "cathrynlavery",
+          "repo": "diagram-design",
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "description": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, and Pi. 44 diagram types. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+          "language": "HTML",
+          "langColor": "#e34c26",
+          "stars": 55982,
+          "forks": 3542,
+          "todayStars": 10237
+        },
+        {
+          "owner": "NationalSecurityAgency",
+          "repo": "ghidra",
+          "url": "https://github.com/NationalSecurityAgency/ghidra",
+          "description": "Ghidra is a software reverse engineering (SRE) framework",
+          "language": "Java",
+          "langColor": "#b07219",
+          "stars": 88885,
+          "forks": 9928,
+          "todayStars": 6614
+        },
+        {
+          "owner": "ranxianglei",
+          "repo": "billion-context",
+          "url": "https://github.com/ranxianglei/billion-context",
+          "description": "A context-compression plugin for small context windows (a 100K context is enough), token savings (5x fewer tokens), and month-long single sessions (billions of tokens).上下文压缩插件，兼顾小窗口(100k上下文足矣)省token(省5倍token)和超长会话(数月级别几十亿token单会话)。billion-context is all you need",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 1402,
+          "forks": 116,
+          "todayStars": 659
+        },
+        {
+          "owner": "earthtojake",
+          "repo": "text-to-cad",
+          "url": "https://github.com/earthtojake/text-to-cad",
+          "description": "Give your agent CAD superpowers.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 20743,
+          "forks": 2052,
+          "todayStars": 2244
+        },
+        {
+          "owner": "twostraws",
+          "repo": "SwiftUI-Agent-Skill",
+          "url": "https://github.com/twostraws/SwiftUI-Agent-Skill",
+          "description": "SwiftUI agent skill for Claude Code, Codex, and other AI tools.",
+          "language": "",
+          "langColor": "",
+          "stars": 6107,
+          "forks": 221,
+          "todayStars": 900
+        },
+        {
+          "owner": "DuarteSantos8",
+          "repo": "openGym",
+          "url": "https://github.com/DuarteSantos8/openGym",
+          "description": "Self-hosted gym & body-weight tracker — plan routines, log workouts (supersets, warm-ups, cardio), see which muscles are trained, fatigued or detrained, import from FitNotes/Strong/Hevy, passkey login. Your data, your server.",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 12406,
+          "forks": 1521,
+          "todayStars": 4471
+        },
+        {
+          "owner": "cursor",
+          "repo": "plugins",
+          "url": "https://github.com/cursor/plugins",
+          "description": "Cursor plugin specification and official plugins",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 11665,
+          "forks": 1136,
+          "todayStars": 1214
+        }
+      ]
+    },
+    {
       "weekId": "2026-W41",
       "startDate": "2026-10-05",
       "endDate": "2026-10-11",
