@@ -1,6 +1,146 @@
 {
   "weeks": [
     {
+      "weekId": "2026-W44",
+      "startDate": "2026-10-26",
+      "endDate": "2026-11-01",
+      "fetchedAt": "2026-10-30T04:09:14.482Z",
+      "repos": [
+        {
+          "owner": "cloudflare",
+          "repo": "security-audit-skill",
+          "url": "https://github.com/cloudflare/security-audit-skill",
+          "description": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 52998,
+          "forks": 3400,
+          "todayStars": 14320
+        },
+        {
+          "owner": "php",
+          "repo": "php-src",
+          "url": "https://github.com/php/php-src",
+          "description": "The PHP Interpreter",
+          "language": "C",
+          "langColor": "#555555",
+          "stars": 41726,
+          "forks": 8493,
+          "todayStars": 960
+        },
+        {
+          "owner": "AgriciDaniel",
+          "repo": "claude-seo",
+          "url": "https://github.com/AgriciDaniel/claude-seo",
+          "description": "Universal SEO skill for Claude Code. 26 sub-skills + 19 sub-agents covering technical SEO, E-E-A-T, schema, GEO/AEO, agent readiness (Lighthouse Agentic Browsing, WebMCP, llms.txt), backlinks, local SEO, e-commerce, international SEO, Google APIs, and PDF/Excel reporting. 9 optional extensions for live SEO data.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 24065,
+          "forks": 3226,
+          "todayStars": 4110
+        },
+        {
+          "owner": "pbakaus",
+          "repo": "impeccable",
+          "url": "https://github.com/pbakaus/impeccable",
+          "description": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships.",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 95678,
+          "forks": 5637,
+          "todayStars": 9713
+        },
+        {
+          "owner": "multica-ai",
+          "repo": "andrej-karpathy-skills",
+          "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+          "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
+          "language": "",
+          "langColor": "",
+          "stars": 226509,
+          "forks": 22619,
+          "todayStars": 4250
+        },
+        {
+          "owner": "TauricResearch",
+          "repo": "TradingAgents",
+          "url": "https://github.com/TauricResearch/TradingAgents",
+          "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 118392,
+          "forks": 22640,
+          "todayStars": 5557
+        },
+        {
+          "owner": "hugohe3",
+          "repo": "ppt-master",
+          "url": "https://github.com/hugohe3/ppt-master",
+          "description": "AI turns documents or topics into real, native PowerPoint decks—with native shapes, transitions and animations, data-backed charts and tables on demand, audio narration from speaker notes, and support for your own .pptx templates. · by Hugo He",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 70947,
+          "forks": 5534,
+          "todayStars": 4980
+        },
+        {
+          "owner": "obra",
+          "repo": "superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "description": "An agentic skills framework & software development methodology that works.",
+          "language": "Shell",
+          "langColor": "#89e051",
+          "stars": 308717,
+          "forks": 27461,
+          "todayStars": 4894
+        },
+        {
+          "owner": "anthropics",
+          "repo": "knowledge-work-plugins",
+          "url": "https://github.com/anthropics/knowledge-work-plugins",
+          "description": "Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 33878,
+          "forks": 3726,
+          "todayStars": 2504
+        },
+        {
+          "owner": "Leonxlnx",
+          "repo": "taste-skill",
+          "url": "https://github.com/Leonxlnx/taste-skill",
+          "description": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 105666,
+          "forks": 7138,
+          "todayStars": 4359
+        },
+        {
+          "owner": "jakubkrehel",
+          "repo": "skills",
+          "url": "https://github.com/jakubkrehel/skills",
+          "description": "A collection of agent skills that help you build great interfaces.",
+          "language": "Markdown",
+          "langColor": "#083fa1",
+          "stars": 9202,
+          "forks": 349,
+          "todayStars": 980
+        },
+        {
+          "owner": "ruvnet",
+          "repo": "ruflo",
+          "url": "https://github.com/ruvnet/ruflo",
+          "description": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 80166,
+          "forks": 9402,
+          "todayStars": 1854
+        }
+      ]
+    },
+    {
       "weekId": "2026-W43",
       "startDate": "2026-10-19",
       "endDate": "2026-10-25",
