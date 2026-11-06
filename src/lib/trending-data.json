@@ -1,6 +1,190 @@
 {
   "weeks": [
     {
+      "weekId": "2026-W45",
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-08",
+      "fetchedAt": "2026-11-06T04:54:10.219Z",
+      "repos": [
+        {
+          "owner": "thedotmack",
+          "repo": "claude-mem",
+          "url": "https://github.com/thedotmack/claude-mem",
+          "description": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 113639,
+          "forks": 9854,
+          "todayStars": 9318
+        },
+        {
+          "owner": "Nutlope",
+          "repo": "hallmark",
+          "url": "https://github.com/Nutlope/hallmark",
+          "description": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+          "language": "CSS",
+          "langColor": "#663399",
+          "stars": 48908,
+          "forks": 2592,
+          "todayStars": 6994
+        },
+        {
+          "owner": "pingdotgg",
+          "repo": "t3code",
+          "url": "https://github.com/pingdotgg/t3code",
+          "description": "",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 48547,
+          "forks": 9646,
+          "todayStars": 16235
+        },
+        {
+          "owner": "anthropics",
+          "repo": "skills",
+          "url": "https://github.com/anthropics/skills",
+          "description": "Public repository for Agent Skills",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 187826,
+          "forks": 22155,
+          "todayStars": 3072
+        },
+        {
+          "owner": "HKUDS",
+          "repo": "DeepTutor",
+          "url": "https://github.com/HKUDS/DeepTutor",
+          "description": "DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 55561,
+          "forks": 6809,
+          "todayStars": 6229
+        },
+        {
+          "owner": "max-sixty",
+          "repo": "worktrunk",
+          "url": "https://github.com/max-sixty/worktrunk",
+          "description": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 11595,
+          "forks": 441,
+          "todayStars": 1802
+        },
+        {
+          "owner": "milind-soni",
+          "repo": "OpenMausBot",
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "description": "Open-source Grok Bot alternative with a virtual machine that bots can use",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 13706,
+          "forks": 1897,
+          "todayStars": 5580
+        },
+        {
+          "owner": "obra",
+          "repo": "superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "description": "An agentic skills framework & software development methodology that works.",
+          "language": "Shell",
+          "langColor": "#89e051",
+          "stars": 313115,
+          "forks": 27859,
+          "todayStars": 5131
+        },
+        {
+          "owner": "pbakaus",
+          "repo": "impeccable",
+          "url": "https://github.com/pbakaus/impeccable",
+          "description": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships.",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 104100,
+          "forks": 6168,
+          "todayStars": 9303
+        },
+        {
+          "owner": "hyprwm",
+          "repo": "Hyprland",
+          "url": "https://github.com/hyprwm/Hyprland",
+          "description": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks.",
+          "language": "C++",
+          "langColor": "#f34b7d",
+          "stars": 40380,
+          "forks": 2169,
+          "todayStars": 1371
+        },
+        {
+          "owner": "jakubkrehel",
+          "repo": "skills",
+          "url": "https://github.com/jakubkrehel/skills",
+          "description": "A collection of agent skills that help you build great interfaces.",
+          "language": "Markdown",
+          "langColor": "#083fa1",
+          "stars": 11080,
+          "forks": 427,
+          "todayStars": 1840
+        },
+        {
+          "owner": "calesthio",
+          "repo": "OpenMontage",
+          "url": "https://github.com/calesthio/OpenMontage",
+          "description": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video production studio.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 77273,
+          "forks": 10268,
+          "todayStars": 4132
+        },
+        {
+          "owner": "multica-ai",
+          "repo": "andrej-karpathy-skills",
+          "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+          "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
+          "language": "",
+          "langColor": "",
+          "stars": 229943,
+          "forks": 22888,
+          "todayStars": 3713
+        },
+        {
+          "owner": "ghostty-org",
+          "repo": "ghostty",
+          "url": "https://github.com/ghostty-org/ghostty",
+          "description": "👻 Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.",
+          "language": "Zig",
+          "langColor": "#ec915c",
+          "stars": 63672,
+          "forks": 3832,
+          "todayStars": 726
+        },
+        {
+          "owner": "Leonxlnx",
+          "repo": "taste-skill",
+          "url": "https://github.com/Leonxlnx/taste-skill",
+          "description": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 110800,
+          "forks": 7440,
+          "todayStars": 5426
+        },
+        {
+          "owner": "The-PR-Agent",
+          "repo": "pr-agent",
+          "url": "https://github.com/The-PR-Agent/pr-agent",
+          "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 15125,
+          "forks": 2115,
+          "todayStars": 1355
+        }
+      ]
+    },
+    {
       "weekId": "2026-W44",
       "startDate": "2026-10-26",
       "endDate": "2026-11-01",
