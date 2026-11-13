@@ -1,6 +1,135 @@
 {
   "weeks": [
     {
+      "weekId": "2026-W46",
+      "startDate": "2026-11-09",
+      "endDate": "2026-11-15",
+      "fetchedAt": "2026-11-13T04:51:35.937Z",
+      "repos": [
+        {
+          "owner": "anthropics",
+          "repo": "skills",
+          "url": "https://github.com/anthropics/skills",
+          "description": "Public repository for Agent Skills",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 193777,
+          "forks": 22798,
+          "todayStars": 6055
+        },
+        {
+          "owner": "milind-soni",
+          "repo": "OpenMausBot",
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "description": "Open-source Grok Bot alternative with a virtual machine that bots can use",
+          "language": "TypeScript",
+          "langColor": "#3178c6",
+          "stars": 21812,
+          "forks": 3032,
+          "todayStars": 9104
+        },
+        {
+          "owner": "vercel-labs",
+          "repo": "agent-browser",
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "description": "Browser automation CLI for AI agents",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 50397,
+          "forks": 3508,
+          "todayStars": 4601
+        },
+        {
+          "owner": "NVIDIA",
+          "repo": "auto-ontology",
+          "url": "https://github.com/NVIDIA/auto-ontology",
+          "description": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows.",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 12299,
+          "forks": 1013,
+          "todayStars": 5802
+        },
+        {
+          "owner": "cloudflare",
+          "repo": "security-audit-skill",
+          "url": "https://github.com/cloudflare/security-audit-skill",
+          "description": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
+          "language": "JavaScript",
+          "langColor": "#f1e05a",
+          "stars": 71315,
+          "forks": 4744,
+          "todayStars": 10700
+        },
+        {
+          "owner": "vercel-labs",
+          "repo": "agent-desktop",
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "description": "Computer use CLI for AI agents",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 22844,
+          "forks": 1693,
+          "todayStars": 6414
+        },
+        {
+          "owner": "mattpocock",
+          "repo": "skills",
+          "url": "https://github.com/mattpocock/skills",
+          "description": "Skills for Real Engineers. Straight from my .agents directory.",
+          "language": "Shell",
+          "langColor": "#89e051",
+          "stars": 323147,
+          "forks": 27109,
+          "todayStars": 8731
+        },
+        {
+          "owner": "zed-industries",
+          "repo": "zed",
+          "url": "https://github.com/zed-industries/zed",
+          "description": "Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.",
+          "language": "Rust",
+          "langColor": "#dea584",
+          "stars": 94871,
+          "forks": 11671,
+          "todayStars": 2339
+        },
+        {
+          "owner": "google-deepmind",
+          "repo": "mujoco",
+          "url": "https://github.com/google-deepmind/mujoco",
+          "description": "Multi-Joint dynamics with Contact. A general purpose physics simulator.",
+          "language": "C++",
+          "langColor": "#f34b7d",
+          "stars": 17784,
+          "forks": 2181,
+          "todayStars": 1671
+        },
+        {
+          "owner": "google",
+          "repo": "skills",
+          "url": "https://github.com/google/skills",
+          "description": "Agent Skills for Google products and technologies",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 24090,
+          "forks": 2006,
+          "todayStars": 1933
+        },
+        {
+          "owner": "D4Vinci",
+          "repo": "Scrapling",
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "description": "🕷️ The BEST Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev",
+          "language": "Python",
+          "langColor": "#3572A5",
+          "stars": 102234,
+          "forks": 10641,
+          "todayStars": 4743
+        }
+      ]
+    },
+    {
       "weekId": "2026-W45",
       "startDate": "2026-11-02",
       "endDate": "2026-11-08",
